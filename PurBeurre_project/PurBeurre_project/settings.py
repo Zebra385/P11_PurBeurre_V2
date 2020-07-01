@@ -127,3 +127,5 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1']
+
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR,'template')]

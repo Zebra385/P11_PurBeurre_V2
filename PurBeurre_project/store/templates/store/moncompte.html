@@ -1,0 +1,24 @@
+{% extends "store/base.html" %}
+
+{% block title %} Mon compte {% endblock %}
+
+
+
+{% block content %}
+<div class="container">
+	<h1></br></h1>
+	<h2 class="text-center mt-0">Entrer login et mot de passe<h2>
+	<form  action="/store/moncompte/" method="post">
+		<!-- Add balise for the security-->
+		{% csrf_token%}
+
+		{{form.as_p }}
+		<p>
+			<input type="submit" value="Se connecter"/>
+		</p>
+		
+
+		
+	</form>
+</div>
+{% endblock %}

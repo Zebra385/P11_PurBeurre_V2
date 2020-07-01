@@ -22,6 +22,7 @@ urlpatterns = [
 	url(r'^$', views.accueil),
 	url(r'^store/', include('store.urls')),# importation of the urls from app store
     url(r'^admin/', admin.site.urls),
+    # url(r'^register$', register),pour création de compte
 ]
 
 if settings.DEBUG:

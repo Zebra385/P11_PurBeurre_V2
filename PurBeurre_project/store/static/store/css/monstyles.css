@@ -1,0 +1,48 @@
+title{
+  font-family: "Open Sans", sans-serif;
+}
+html {
+  font-family: "Scope One", sans-serif;
+}
+#presentation{
+	background-color: #e8a75d;
+}
+
+
+#contact{
+	background-color: #86ebe6;
+}
+
+ul.errorlist {
+margin-left: 160px;
+padding: 0;
+list-style-type: none;
+color: #c45525;
+
+}
+form label{
+	display: block;
+	width: : 150px;
+	float: left;
+	text-align: right;
+	padding: 4px 10px 0 0 ;
+}
+form input[type="email"], form input[type="text"],
+form input[type="password"]{
+	display: block;
+	width: 250px;
+	padding: 2px;
+}
+form input[type="submit"]{
+	margin: 0 20px 0 160px;
+	border-style: solid;
+	border-width: 1px;
+	border color: #de9440 #e8a75d #e8a75d #de9440;
+	background-color: #86ebe6;
+	color: #FFFFFF;
+	padding: 2px 15px 3px 15px;
+	text-align: center;
+}
+a{
+	color: #3b5998;
+}

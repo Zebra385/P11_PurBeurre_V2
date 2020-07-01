@@ -47,12 +47,9 @@
   box-sizing: border-box;
 }
 
-title{
-  font-family: "Open Sans", sans-serif;
-}
 
 html {
-  font-family: "Scope One", sans-serif;
+  font-family: sans-serif;
   line-height: 1.15;
   -webkit-text-size-adjust: 100%;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
@@ -613,7 +610,7 @@ pre code {
 .no-gutters > .col,
 .no-gutters > [class*=col-] {
   padding-right: 0;
-  padding-left: 0;
+  padding-left: 0;font-family
 }
 
 .col-xl,
