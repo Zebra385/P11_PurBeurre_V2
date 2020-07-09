@@ -1,0 +1,11 @@
+{% for essai in essais %}
+    <div class="col-sm-4 text-center">
+        <a>
+          <img class="img-responsive" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+        </a>
+        <h3><a>{{ essai.name_product }}</a></h3>
+        <h3><a>{{ essai.nutriscore_product }}</a></h3>
+    
+	</div>
+	  {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+{% endfor %}

@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'store.apps.StoreConfig',
+    
 ]
 
 MIDDLEWARE = [
@@ -129,3 +130,6 @@ STATIC_URL = '/static/'
 INTERNAL_IPS = ['127.0.0.1']
 
 TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR,'template')]
+
+
+LOGIN_REDIRECT_URL = '/'

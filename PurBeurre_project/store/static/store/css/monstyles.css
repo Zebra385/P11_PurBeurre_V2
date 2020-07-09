@@ -4,10 +4,26 @@ title{
 html {
   font-family: "Scope One", sans-serif;
 }
+#produits{
+	background-color: #e8a75d;
+}
 #presentation{
 	background-color: #e8a75d;
 }
+#presentation_utilisateur{
+	height: 25vh;
+	}
+#presentation_email{
+	height: 25vh;
+	background-color: #e8a75d;
+	}
+#chercher{
+	height: 25vh;
+	}
 
+header{
+	background-color: #86ebe6;
+}
 
 #contact{
 	background-color: #86ebe6;

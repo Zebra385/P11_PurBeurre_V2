@@ -3,22 +3,43 @@
 {% block title %} Mon compte {% endblock %}
 
 
+<!-- Présentation du compte-->
 
 {% block content %}
-<div class="container">
-	<h1></br></h1>
-	<h2 class="text-center mt-0">Entrer login et mot de passe<h2>
-	<form  action="/store/moncompte/" method="post">
-		<!-- Add balise for the security-->
-		{% csrf_token%}
+<header class="masthead" id="presentation_utilisateur">
 
-		{{form.as_p }}
-		<p>
-			<input type="submit" value="Se connecter"/>
-		</p>
+   
+       {% if user.is_authenticated %}
+		<section class="page-section" >
 		
+		<h1></br></h1>
+		
+		<h2 class="text-uppercase text-white font-weight-bold text-center mt-0">{{user.username}} est connecté.</h2>
+		</section>
+		
+		{% else%}
+		<section class="page-section" >
 
+		<h1></br></h1>
 		
-	</form>
+		<h2 class="text-center mt-0">Non connecté!!!!</h2>
+		</section>
+		
+		{% endif%} 
+   
+</header>
+<div class="container h-25" id="presentation_email">
+       {% if user.is_authenticated %}
+		
+		<section class="page-section" >
+			<h2 class="text-center mt-0">Son adresse est: {{user.email}}</h2>
+		</section>
+		{% else%}
+		
+		<section class="page-section" >
+			<h2 class="text-center mt-0">email?</h2>
+		</section>
+		{% endif%} 
 </div>
+
 {% endblock %}

@@ -1,0 +1,17 @@
+{% extends "accounts/base.html" %}
+{% block title %} Se connecter {% endblock %}
+
+{% block content_suite %} 
+<div class="container">
+    <h1></br></h1>
+    <h2 class="text-center mt-0">Entrer login et mot de passe<h2>
+<!--form method="post" action="{% url 'accounts/login/' %}"-->
+<form method="post" action="">
+{% csrf_token %}
+{{ form.as_p}}
+</br>
+
+<input type="submit" value="submit">
+
+</form>
+{% endblock %}

@@ -1,18 +1,26 @@
 from django import forms
-from store.models import Persons
+from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm
 
-class LoginForm(forms.Form):
-	email = forms.EmailField(label='Courriel')
-	password = forms.CharField(label='Mot de passe', widget = forms.PasswordInput)
+# Create your models here.
+class CreateUserForm(UserCreationForm):
+	email = forms.EmailField(required=True)
+	password = forms.CharField(max_length=32)
 
-	def clean(self):
-		cleaned_data = super (LoginForm, self).clean()
-		email = cleaned_data.get("email")
-		password = cleaned_data.get("password")
+	class Meta:
+		
+		model = User
+		fields = '__all__'
 
-		#Verify the two fields were valid
-		if email and password:
-			result = Persons.objects.filter(password=password, email=email)
-			if len(result) !=1:
-				raise forms.ValidationError("Adresse de courriel ou mot de passe éronné.")
-		return cleaned_data
+
+	def save(self, commit=True):
+		user = super(CreateUserForm, self).save(commit=False)
+		user.email = self.cleaned_data['email']
+		user.password = self.cleaned_data['password']
+		if commit:
+			user.save()
+		return user
+
+class ProductForm(forms.Form):
+    name_product = forms.CharField(label='Nom du produit recherché', max_length=150, widget=forms.TextInput(attrs={'class': 'form-control'}),)
+
