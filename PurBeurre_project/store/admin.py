@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Products,Categories, Persons, Attributs
+from .models import Products,Categories, Attributs
 
 # Register your models here.
 
@@ -14,9 +14,6 @@ class ContactAdmin(admin.ModelAdmin):
 class ContactAdmin(admin.ModelAdmin):
     pass
 
-@admin.register(Persons)
-class ContactAdmin(admin.ModelAdmin):
-    pass
 
 @admin.register(Attributs)
 class ContactAdmin(admin.ModelAdmin):

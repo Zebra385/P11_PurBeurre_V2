@@ -62,3 +62,27 @@ form input[type="submit"]{
 a{
 	color: #3b5998;
 }
+
+
+.resultat_image{
+	position:absolute;
+	z-index: 1;
+	
+}
+
+.image_nutriscore{
+	position:absolute;
+	right: 0px;
+	top: 0px;
+	z-index: 2;
+	
+}
+#site{
+	background-color: #86ebe6;
+}
+#aliment_header{
+	background-color: #e8a75d;
+}
+#aliment_footer{
+	background-color: #de9440;
+}

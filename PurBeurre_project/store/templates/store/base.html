@@ -28,11 +28,11 @@
                 <div class="row" id="navbarResponsive">
                     <nav class="navbar-light navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
                         <div class="container">
-                            <img width="50px" src="{% static 'store/assets/img/logo_pur_beurre.png' %}" /> <a>Pur beurre</a>
+                            <a class="nav-link js-scroll-trigger" href="/"><img width="50px" src="{% static 'store/assets/img/logo_pur_beurre.png' %}" href="/" alt="Accueil"/> Pur beurre</a>
                             
                             <div class="collapse navbar-collapse" id="navbarResponsive">
                                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
-                                    <li class="nav-item"><a class="btn btn-secondary btn-xl js-scroll-trigger" href="{% url 'store:accueil' %}#Chercher">Chercher</a></li>
+                                    <li class="nav-item"><a class="btn btn-secondary btn-xl js-scroll-trigger" href="/#Chercher">Chercher</a></li>
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:moncompte' %}"><img width="50px" src="{% static 'store/assets/img/noun_account.png' %}" alt="page_connection"/></a></li>
                                     
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:aliment' %}"><img width="50px" src="{% static 'store/assets/img/noun_Carrot.png' %}" alt="Mes aliments"/></a></li>
@@ -67,8 +67,8 @@
                 <div class="row" id="navbarResponsive">
                
                   
-                        <div class="col-lg-7"><h6>Copyright © 2020 - Bootstrap</h6> </div>
-                        <div class="col-lg-5"><a class="nav-link js-scroll-trigger" href="#contact"><h6>Contact</h6></a></div>                       
+                        <div class="col-lg-11"><h6>Copyright © 2020 - Bootstrap</h6> </div>
+                        <div class="col-lg-1"><a class="nav-link js-scroll-trigger" href="/#contact"><h6 text-right>Contact</h6></a></div>                       
                     
                 </div>
             </div>

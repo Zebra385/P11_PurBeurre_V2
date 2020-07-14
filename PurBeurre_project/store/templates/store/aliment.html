@@ -1,5 +1,59 @@
 {% extends "store/base.html" %}
 
-{% block title %} Page aliment {% endblock %}
-{% block content_accueil%}
+{% block title %} Page aliment(s){% endblock %}
+
+{% block content%}
+{% for essai in list_substituts %}
+<header>.
+	</header>
+<!-- Masthead-->
+<section class="page-section"  id="aliment_header">
+    <img class="d-block mx-auto" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+        <div class="row h-25 align-items-center justify-content-center text-center">
+            <div class="col-lg-11 ">
+                <h1 class="text-uppercase text-white font-weight-bold">le produit est :  {{essai.name_product}} </h1>
+                </br>
+            </div>
+                
+    	
+    </div>
+</section>
+<section class="page-section" id="aliment_footer">
+            
+                
+                <hr class="divider my-6" />
+                <div class="row">
+                    <div class="col-lg-6 text-center">
+                        <div class="mt-5">
+                            <!--Nutriscore substitut-->
+                            <h3 class="h4 mb-2">Nutriscore : <B>{{essai.nutriscore_product| upper}}</B></h3>
+                    	</div>
+                	</div>
+                    <div class="col-lg-6 ">
+                        <div class="mt-5">                        
+                            <!--Nutriscore substitut-->
+	                    	<h3>Repères nutritionnel pour 100g</h3>
+                		</div>
+            		</div>
+            	</div>
+            	<hr class="divider my-6" />
+                <div class="row">
+        		    <!--lien url openfoodfacts-->
+            		<div class="col-lg-2" text-center > <h1>======> </h1></div>
+		            <div class="col-lg-offset-4 col-lg-6 " text-center id="site"><a class="nav-link js-scroll-trigger" href="{{essai.url_site}}"><h2 >Voir la fiche d'openfoodfacts</h2></a>
+		            </div>
+            	</div> 
+        	
+</section>
+                    
+                  
+                   
+               
+         
+          
+            
+     
+
+
+{% endfor %}
 {% endblock %}

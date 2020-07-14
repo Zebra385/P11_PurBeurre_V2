@@ -12,10 +12,8 @@ urlpatterns = [
 	url(r'^register/$', views.registration, name='register'),
 	#url(r'^login/$', views.login_views, name="login_views"),
 	url(r'^logout/$', views.logout_views, name="logout_views"),
-	url(r'^affichage_base/$', views.affichage_base, name="affichage_base"),
-	url(r'^affichage_base_product/$', views.affichage_base_product, name="affichage_base_product"),
 	url(r'^search_product/$', views.search_product, name="search_product"),
-	
+	url(r'^sauvegarde/$', views.sauvegarde, name="sauvegarde"),
 
     #url(r'^$', views.index), # "/store" will call the method "index" in "views.py"
 ]
