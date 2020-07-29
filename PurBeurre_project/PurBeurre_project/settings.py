@@ -25,7 +25,7 @@ SECRET_KEY = '*0azs%)s(nxq&5g5%l&a&31o3g%-1&n9ubo=_jpfel-1e^08^g'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -39,8 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'store.apps.StoreConfig',
-    
-]
+    ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -80,9 +79,12 @@ WSGI_APPLICATION = 'PurBeurre_project.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql', # on utilise l'adaptateur postgresql
-        'NAME': 'db_purbeurre', # le nom de notre base de donnees creee precedemment
-        'USER': 'adm_postgres', # attention : remplacez par votre nom d'utilisateur
+    	# We use the adaptater for postgresqlpostgresql
+        'ENGINE': 'django.db.backends.postgresql',
+        # The name of database xhose is create befor
+        'NAME': 'db_purbeurre', 
+        # The user must be replave by your own name
+        'USER': 'adm_postgres', 
         'PASSWORD': 'maevateddy',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -95,16 +97,20 @@ DATABASES = {
 
 AUTH_PASSWORD_VALIDATORS = [
     {
-        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.MinimumLengthValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.CommonPasswordValidator',
     },
     {
-        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+        'NAME':
+        'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
 
@@ -130,7 +136,7 @@ STATIC_URL = '/static/'
 
 INTERNAL_IPS = ['127.0.0.1']
 
-TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR,'template')]
+TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'template')]
 
 
 LOGIN_REDIRECT_URL = '/'

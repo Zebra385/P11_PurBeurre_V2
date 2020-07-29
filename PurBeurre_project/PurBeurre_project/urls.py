@@ -20,14 +20,16 @@ from django.contrib import admin
 from store import views
 
 urlpatterns = [
-	url(r'^$', views.accueil),
-	url(r'^store/', include('store.urls')),# importation of the urls from app store
-	#url(r'^accounts/', include('accounts.urls')),# importation of the urls from app accounts
-    #rl(r'^register$', register),# pour création de compte
-    url('admin/',admin.site.urls),
-    #path('', include('accounts.urls')),
-    path('store/',include('django.contrib.auth.urls')),
-]
+	url(r'^$', views.accueil, name="accueil"),
+	# importation of the urls from app store
+	url(r'^store/', include('store.urls')),
+	# to create news users
+	# url(r'^register$', register),
+    url('admin/', admin.site.urls),
+    path('store/', include('django.contrib.auth.urls')),
+
+    ]
+
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [

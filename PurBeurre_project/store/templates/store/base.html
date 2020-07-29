@@ -8,7 +8,7 @@
         <meta name="author" content="" />
         <title>{% block title %} {% endblock %}</title>
         <!-- Favicon-->
-        <link rel="icon" type="image/png" href="{% static 'store/assets/img/logo_pur_beurre-favicon.png' %}" />
+        <link rel="icon" type="image/png" href="{% static 'store/assets/img/logo_pur_beurre_favicon.png' %}" />
         <!-- Font Awesome icons (free version)-->
         <script src="https://use.fontawesome.com/releases/v5.13.0/js/all.js" crossorigin="anonymous"></script>
         <!-- Google fonts-->
@@ -58,21 +58,26 @@
           
          
         </div>
-        
-     
-
+        <p>
+        <a href="http://jigsaw.w3.org/css-validator/check/referer">
+            <img style="border:0;width:88px;height:31px"
+                src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                alt="CSS Valide !" />
+            </a>
+        </p>
+      
         <!-- Footer-->
         <footer class="bg-light">
             <div class="container">
                 <div class="row" id="navbarResponsive">
                
                   
-                        <div class="col-lg-11"><h6>Copyright © 2020 - Bootstrap</h6> </div>
+                        <div class="col-lg-11"> <a class="nav-link js-scroll-trigger" href=" {% url 'store:copyright' %}"><h6>Copyright</h6> </a></div>
                         <div class="col-lg-1"><a class="nav-link js-scroll-trigger" href="/#contact"><h6 text-right>Contact</h6></a></div>                       
                     
                 </div>
             </div>
-        </footer>
+       </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.bundle.min.js"></script>
