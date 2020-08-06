@@ -3,6 +3,8 @@
 {% block title %} Page aliment(s){% endblock %}
 
 {% block content%}
+{% if text is None %}
+
 {% for essai in list_substituts %}
 <header>.
 	</header>
@@ -56,4 +58,13 @@
 
 
 {% endfor %}
+	
+	{%else%}
+
+		<div class="col-lg-12 text-center" id='alerte'>
+	        <h2 class="text-danger">{{text}}</h2>
+	        <hr>
+	    </div>
+	  
+    {% endif%}
 {% endblock %}

@@ -1,6 +1,7 @@
 from django.test import TestCase
 from django.test import Client
 from django.urls  import reverse
+from django.contrib.auth.models import User
 from .models import Categories, Products, Attributs
 # Create your tests here.
 
@@ -9,6 +10,7 @@ class AccueilPageTestCase(TestCase):
      # test that accueil page returns a 200 if the item exists.
     def test_accueil_page(self):
         response = self.client.get(reverse('accueil'))
+
         self.assertEqual(response.status_code, 200)
 
 # Detail SearchProduct
@@ -24,22 +26,22 @@ class SearchProducteTestCase(TestCase):
 
     # test that Resultat page returns a 200 if the product exists
     def test_search_product_page_return_200(self):
-        product_name = self.product.name_product
-        print('le produit est : ',product_name)
-        response = self.client.get('store:search_product',name_product=product_name)
+        name_product = self.product.name_product
+        print('le produit est : ',name_product)
+        response = self.client.get(reverse('store:search_product'),name_product=name_product)
+        
+        
         self.assertEqual(response.status_code, 200)
 
-    # test that Resultat page returns a 404 if the product does not exist
-    def test_search_product_page_return_404(self):
-        product_name= "banane"
-        response = self.client.get('store:search_product', name_product=product_name)
-        self.assertEqual(response.status_code, 404)
+   
 
 #Detail save a substitut in datadabase Attribut
 class SauvegardeTestCase(TestCase):
 
     def setUp(self):
-        
+        self.user = User.objects.create(username='jean', password='mpjean3!', email='jean@orange.fr')
+        self.client = Client() # May be you have missed this line
+
         pate = Categories.objects.create(name_category='pate')
         self.category = Categories.objects.get(name_category='pate')
         id_category = int(self.category.id)
@@ -50,25 +52,25 @@ class SauvegardeTestCase(TestCase):
 
 
     # test if a user is connect
-    def test_user_connect(self):
-        c=Client()
-        c.logout()
+    def test_user_exist(self):
         name_person_id = None
         attribut_choice = self.product.name_product
-        response = self.client.get('store:sauvegarde', attribut_choice=attribut_choice, name_person_id=name_person_id)
-        self.assertEqual(response.status_code, 404)
+        response = self.client.get(reverse('store:sauvegarde'), name_person_id=name_person_id, attribut_choice=attribut_choice)
+        # code 302 because redirection to the login page
+        self.assertEqual(response.status_code, 302)
 
 
-    #test the dowload in data base Attributs
+    #test the dowload in data base Attributs when the user is connect
     def test_load_attribut(self):
-        old_loading = Attributs.objects.count() # count Attributs before a request
-        c = Client()
-        person= c.login(username='marie', password='mp12345!')
-        print('la personne est:', person)
-        attribut_choice = self.product.name_product
+        self.person=self.client.force_login(self.user)
+        #self.person=self.client.login(username=self.user.username, password='mpjean3!')
+        print('la person connecté est;', self.person)    
+        attribut_choice = self.product.id
+        choice=self.product.id
         print('l attribut est : ', attribut_choice)
-        
-        response = self.client.get('store:sauvegarde', attribut_choice=attribut_choice, follow=True)
-        new_loading = Attributs.objects.count() # cloadind after
+        print('l id du user est : ', self.user.id)
+        response = self.client.post(reverse('store:sauvegarde'),args=(choice,),name_person_id=self.user.id, attribut_choice=attribut_choice)
+        #response = self.client.post(reverse('store:sauvegarde'), choice=choice)
+        print('reponse avec user connecté est:', response)              
         self.assertEqual(response.status_code, 200)
-        # self.assertEqual(new_loading, old_loading + 1) # make sure 1 loading was added
+      

@@ -28,14 +28,14 @@
                 <div class="row" id="navbarResponsive">
                     <nav class="navbar-light navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
                         <div class="container">
-                            <a class="nav-link js-scroll-trigger" href="/"><img width="50px" src="{% static 'store/assets/img/logo_pur_beurre.png' %}" href="/" alt="Accueil"/> Pur beurre</a>
+                            <a class="nav-link js-scroll-trigger" href="/"><img width="50px" src="{% static 'store/assets/img/logo_pur_beurre.png' %}" href="/" title="Accueil" alt="Accueil"/> Pur beurre</a>
                             
                             <div class="collapse navbar-collapse" id="navbarResponsive">
                                 <ul class="navbar-nav ml-auto my-2 my-lg-0">
                                     <li class="nav-item"><a class="btn btn-secondary btn-xl js-scroll-trigger" href="/#Chercher">Chercher</a></li>
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:moncompte' %}"><img width="50px" src="{% static 'store/assets/img/noun_account.png' %}" alt="page_connection"/></a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:moncompte' %}"><img width="50px" src="{% static 'store/assets/img/noun_account.png' %}" title="Mon compte" alt="page_connection"/></a></li>
                                     
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:aliment' %}"><img width="50px" src="{% static 'store/assets/img/noun_Carrot.png' %}" alt="Mes aliments"/></a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:aliment' %}"><img width="50px" src="{% static 'store/assets/img/noun_Carrot.png' %}" title="Mes aliments" alt="Mes aliments"/></a></li>
                                     {% if user.is_authenticated %}
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'store:logout_views' %}"/a><img width="50px" src="{% static 'store/assets/img/noun_logout.png' %}" title="{{user.username}}, connecté" alt="Se deconnecter"/></a></li>
                                     {% else %}

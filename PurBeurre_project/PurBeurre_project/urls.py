@@ -18,16 +18,24 @@ from django.conf.urls import url
 from django.urls import include,  path
 from django.contrib import admin
 from store import views
+from store.views import AccueilView
+from django.contrib import admin
+from django.urls import path, include
+from django.views.generic import TemplateView
+
+
+
 
 urlpatterns = [
-	url(r'^$', views.accueil, name="accueil"),
+	url(r'^$', AccueilView.as_view(), name="accueil"),
 	# importation of the urls from app store
 	url(r'^store/', include('store.urls')),
 	# to create news users
 	# url(r'^register$', register),
     url('admin/', admin.site.urls),
     path('store/', include('django.contrib.auth.urls')),
-
+    
+    
     ]
 
 if settings.DEBUG:

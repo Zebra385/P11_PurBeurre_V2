@@ -44,11 +44,8 @@ class Attributs(models.Model):
         settings.AUTH_USER_MODEL,
         default=1, on_delete=models.CASCADE
         )
-    product_choice = models.CharField(max_length=150)
     attribut_choice = models.ForeignKey(Products, on_delete=models.CASCADE)
 
-    def __str__(self):
-        return self.product_choice
-
+    
     class Meta:
         verbose_name = "Attributs"

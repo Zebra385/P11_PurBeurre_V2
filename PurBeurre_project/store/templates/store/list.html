@@ -1,32 +1,42 @@
-{% for essai in essais %}
-    <div class="col-sm-4 ">
-    	{% load static %}
-    	<form  action="{% url 'store:sauvegarde' %}" method="post">
-    		{% csrf_token %}
-			
-	        <div class="parent">
-		        <img class="img-responsive image1" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
-		        
-		        {% if essai.nutriscore_product == "a" %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_A.png' %}"/>
-		        {% elif essai.nutriscore_product == "b" %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_B.png' %}"/>
-		        {% elif essai.nutriscore_product == "c" %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_C.png' %}"/>
-		        {% elif essai.nutriscore_product == "d" %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_D.png' %}"/>
-		        {% elif essai.nutriscore_product == "e" %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_E.png' %}"/>
-		        {% else %}
-		        <img class="image2" src="{% static 'store/assets/img/logo_nutriscore_I.png' %}"/>
-		        {% endif %}
-	    	</div>
-	        <h3><a>{{ essai.name_product }}</a></h3>
-	        <input type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
-	        <input type="submit" value="Sauvegarder">
-   		</form>
+{% if text is None %}
 
-	        
-	</div>
-	  {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
-{% endfor %}
+	{% for essai in essais %}
+	    <div class="col-sm-4 ">
+	    	{% load static %}
+	    	<form  action="{% url 'store:sauvegarde' %}" method="post">
+	    		{% csrf_token %}
+				
+		        <div class="parent">
+			        <img class="img-responsive image1" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+			        
+			        {% if essai.nutriscore_product == "a" %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico.png' %}"/>
+			        {% elif essai.nutriscore_product == "b" %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_B.ico' %}"/>
+			        {% elif essai.nutriscore_product == "c" %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_C.ico' %}"/>
+			        {% elif essai.nutriscore_product == "d" %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_D.ico' %}"/>
+			        {% elif essai.nutriscore_product == "e" %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_E.ico' %}"/>
+			        {% else %}
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
+			        {% endif %}
+		    	</div>
+		        <h3><a>{{ essai.name_product }}</a></h3>
+		        <input type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
+		        <input type="submit" value="Sauvegarder">
+	   		</form>
+
+		        
+		</div>
+		  {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+	{% endfor %}
+{%else%}
+	
+		<div class="col-lg-12 text-center" id='alerte'>
+	        <h2 class="text-danger">{{text}}</h2>
+	        <hr>
+	    </div>
+	    
+{% endif%}

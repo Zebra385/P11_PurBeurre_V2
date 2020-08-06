@@ -7,12 +7,22 @@ from store.models import Products, Attributs
 from django.contrib.auth import authenticate, login, logout
 # from .forms import CreateUserForm
 from django.contrib.auth.decorators import login_required
+from django.utils.decorators import method_decorator
 
+from django.views.generic import ListView
+
+from django.views.generic.base import TemplateView
+from django.views.generic.edit import FormView
+from store.forms import ProductForm
+
+from django.contrib.auth.models import User
+from django.views.generic.base import View
 
 # Create your views here.
 
 
 # That will be use in th second version to can register evrybody
+"""
 def registration(request):
     form = CreateUserForm(request.POST)
     if request.method == 'POST':
@@ -27,6 +37,13 @@ def registration(request):
         form = CreateUserForm()
         context = {'form': form}
         return render(request, 'registration/register.html', context)
+"""
+
+class LoginView(View):
+    template_name = 'registration/login.html'
+    
+
+    
 
 
 def logout_views(request):
@@ -34,86 +51,113 @@ def logout_views(request):
     # Redirect to a success page.
     return HttpResponseRedirect('/')
 
-
-def accueil(request):
-    form2 = forms.ProductForm()
-    template = loader.get_template('store/accueil.html')
-    context = {
-        'form': form2,
-    }
-    return HttpResponse(template.render(context, request))
+class MoncompteView(TemplateView):
+    template_name = 'store/moncompte.html'
 
 
-def resultats(request):
-    template1 = loader.get_template('store/resultats.html')
-    return HttpResponse(template1.render(request=request))
+
+class AccueilView(FormView):
+    template_name = "store/accueil.html"
+    form_class = ProductForm
+    
+
+class ResultatsView(TemplateView):
+    template_name = "store/resultats.html"
 
 
-@login_required
-def aliment(request):
-    substituts = Attributs.objects.filter(name_person__id=request.user.id)
-    template = loader.get_template('store/aliment.html')
-    context = {
-        'list_substituts':
-        [substitut.attribut_choice for substitut in substituts],
-    }
-    return HttpResponse(template.render(context, request))
 
+#redirect when user is not logged in
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class AlimentList(ListView):
+    model = Attributs
+    #user = User.objects.create(username='jean', password='mpjean3!', email='jean@orange.fr')
+        
+    
+    #queryset = Attributs.objects.filter(name_person_id=user.id)
+   
+    template_name = 'store/aliment.html'
+    
 
+    def get_queryset(self):
+        self.substituts = Attributs.objects.filter(name_person_id=self.request.user)
+        return self.substituts
+        #elif self.request.user.is_anonymous():
+            
+
+    def get_context_data(self):
+        self.context={
+        'list_substituts':[substitut.attribut_choice for substitut in self.substituts]
+        }
+        return self.context
+  
+    """   
 def page_connection(request):
     template3 = loader.get_template('acccounts/login.html')
     return HttpResponse(template3.render(request=request))
+"""
 
 
-def moncompte(request):
-    template4 = loader.get_template('store/moncompte.html')
-    return HttpResponse(template4.render(request=request))
+class SearchProductView(ListView):
+    template_name='store/resultats.html'
+    model = Products
+    form_class = ProductForm
+    context_object_name = "essais"
 
+            
+    def get_queryset(self):
+        form = forms.ProductForm(self.request.GET)
+        if form.is_valid():
+            self.name_product = form.cleaned_data['name_product']
+            print('form is valid name product est :', self.name_product)
+        try:
+            self.produit = Products.objects.get(name_product=self.name_product)
+            print('form is valid name produit est :', self.produit)
+            self.categori_produit = self.produit.categorie
+            self.essais = Products.objects.filter(
+            categorie= self.categori_produit).order_by('nutriscore_product')
+            self.text = None
+            return self.essais 
+        except Products.DoesNotExist:
+            self.name_product = None
+            self.essais =  None
+            self.text = 'Produit absent de la base de données RETOURNER A L ACCUEIL' 
+            return self.text
 
-def search_product(request):
-    print(request.GET)
-    # if this is a POST request we need to process the form data
-    form2 = forms.ProductForm(data=request.GET)
-    if form2.is_valid():
-        name_product = form2.cleaned_data['name_product']
-        # produit = Products.objects.get(name_product=name_product)
-        produit = get_object_or_404(Products, name_product=name_product)
-        categori_produit = produit.categorie
-        essais = Products.objects.filter(
-            categorie=categori_produit).order_by('nutriscore_product')
-        template = loader.get_template('store/resultats.html')
-        context = {
-            'name_product': name_product,
-            'essais': essais,
-        }
-        return HttpResponse(template.render(context, request))
-    else:
-        name_product = 'Inconnu'
-        template = loader.get_template('store/resultats.html')
-        context = {
-            'name_product': name_product,
-                }
-        return HttpResponse(template.render(context, request))
-
-
-@login_required
-def sauvegarde(request):
-    # we take the id of the person who is connect
-    name_person_id = int(request.user.id)
-    # We select the choice
-    selected_choice = request.POST.get('choice')
-    print('selection:', selected_choice)
-    # we select the substitut
-    attribut_choice = Products.objects.get(pk=selected_choice)
-    # We load the datas in database
-    attribut_choice = Attributs.objects.create(
-        name_person_id=name_person_id,
-        attribut_choice=attribut_choice,
-        )
-    # After we load the choice of substitut we return to page aliment
     
-    return redirect('store:aliment')
+    def get_context_data(self, **kwargs):
+        context = super(SearchProductView, self).get_context_data(**kwargs)
+        context['name_product'] = self.name_product
+        context['essais'] = self.essais
+        context['text'] = self.text
+        return context
 
-def copyright(request):
-    template1 = loader.get_template('store/copyright.html')
-    return HttpResponse(template1.render(request=request))
+
+@method_decorator(login_required(login_url='login'), name='dispatch')
+class SauvegardeView(View):
+    model = Attributs
+    template_name = 'store/aliment.html'
+
+    def post(self,request):
+        # we take the id of the person who is connect
+        name_person_id = int(request.user.id)
+        print('Dans name_person_id:', name_person_id)
+        # We select the choice
+        selected_choice = request.POST.get('choice')
+        print('Dans sauvegarde selection:', selected_choice)
+        # we select the substitut
+        attribut_choice = Products.objects.get(pk=selected_choice)
+        print('Dans sauvegarde attribut_choice est : ', attribut_choice)
+        # We load the datas in database
+        load_choice = Attributs.objects.create(
+            name_person_id=name_person_id,
+            attribut_choice=attribut_choice,
+            )
+        # After we load the choice of substitut we return to page aliment
+        print('Dans sauvegarde load_choice est : ', load_choice.id)
+        return redirect('store:aliment')
+
+
+class CopyrightView(TemplateView):
+    template_name = 'store/copyright.html'
+
+

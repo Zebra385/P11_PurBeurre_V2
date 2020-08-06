@@ -61,21 +61,6 @@ a{
 	color: #3b5998;
 }
 
-
-.resultat_image{
-	position: relative;
-	top: 0;
-	left: 0;
-	z-index: 1;
-	
-}
-
-.img_nutriscore{
-	position:absolute;
-	right: 30px;
-	top: 30px;
-	z-index: 2;
-	}
 .parent {
   position: relative;
   top: 0;
