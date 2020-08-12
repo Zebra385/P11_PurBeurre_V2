@@ -3,14 +3,14 @@
 	{% for essai in essais %}
 	    <div class="col-sm-4 ">
 	    	{% load static %}
-	    	<form  action="{% url 'store:sauvegarde' %}" method="post">
+	    	<form  action="{% url 'substituts:sauvegarde' %}" method="post">
 	    		{% csrf_token %}
 				
 		        <div class="parent">
 			        <img class="img-responsive image1" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
 			        
 			        {% if essai.nutriscore_product == "a" %}
-			        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico.png' %}"/>
+			        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
 			        {% elif essai.nutriscore_product == "b" %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_B.ico' %}"/>
 			        {% elif essai.nutriscore_product == "c" %}

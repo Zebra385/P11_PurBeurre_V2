@@ -7,10 +7,10 @@
 	{% if text is None %}
  		{% include 'store/chercher.html' %}
 	{%else%}
-
+		<hr>
 		<div class="col-lg-12 text-center" id='alerte'>
 	        <h2 class="text-danger">{{text}}</h2>
-	        <hr>
+	        </br>
 	    </div>
 	    {% include 'store/chercher.html' %}
     {% endif%}

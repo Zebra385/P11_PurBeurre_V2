@@ -3,6 +3,7 @@
     {% load static %}
     <head>
         <meta charset="utf-8" />
+        <!-- site responsive with desactivate zoom-->
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
         <meta name="author" content="" />
@@ -21,13 +22,13 @@
         <link href="{% static 'store/css/monstyles.css' %}" rel="stylesheet" />
     </head>
     <body id="page-top">
-        
+        <div class="container">
         <!-- Navigation-->
         <header class="bg-light">
-            <div class="container">
-                <div class="row" id="navbarResponsive">
-                    <nav class="navbar-light navbar-expand-lg navbar-light fixed-top py-3" id="mainNav">
-                        <div class="container">
+            
+                <div class="row" >
+                    <nav class="navbar-light navbar-expand-lg navbar-light fixed-top " id="mainNav">
+                        
                             <a class="nav-link js-scroll-trigger" href="/"><img width="50px" src="{% static 'store/assets/img/logo_pur_beurre.png' %}" href="/" title="Accueil" alt="Accueil"/> Pur beurre</a>
                             
                             <div class="collapse navbar-collapse" id="navbarResponsive">
@@ -35,9 +36,9 @@
                                     <li class="nav-item"><a class="btn btn-secondary btn-xl js-scroll-trigger" href="/#Chercher">Chercher</a></li>
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:moncompte' %}"><img width="50px" src="{% static 'store/assets/img/noun_account.png' %}" title="Mon compte" alt="page_connection"/></a></li>
                                     
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'store:aliment' %}"><img width="50px" src="{% static 'store/assets/img/noun_Carrot.png' %}" title="Mes aliments" alt="Mes aliments"/></a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href="{% url 'substituts:aliment' %}"><img width="50px" src="{% static 'store/assets/img/noun_Carrot.png' %}" title="Mes aliments" alt="Mes aliments"/></a></li>
                                     {% if user.is_authenticated %}
-                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'store:logout_views' %}"/a><img width="50px" src="{% static 'store/assets/img/noun_logout.png' %}" title="{{user.username}}, connecté" alt="Se deconnecter"/></a></li>
+                                    <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'logout' %}"/a><img width="50px" src="{% static 'store/assets/img/noun_logout.png' %}" title="{{user.username}}, connecté" alt="Se deconnecter"/></a></li>
                                     {% else %}
                                     <li class="nav-item"><a class="nav-link js-scroll-trigger" href=" {% url 'login' %}"/a><img width="50px" src="{% static 'store/assets/img/noun_login.png' %}" title="Se connecter" alt="Se connecter"/></a></li>
                                    
@@ -46,37 +47,38 @@
                                     
                                 </ul>
                             </div>
-                        </div>
+                       
                     </nav>
                 </div>
-            </div>
+          
         </header>
-        <div class="container">
+       
          
             
               {% block content %}{% endblock %}
           
          
-        </div>
-        <p>
-        <a href="http://jigsaw.w3.org/css-validator/check/referer">
-            <img style="border:0;width:88px;height:31px"
-                src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
-                alt="CSS Valide !" />
-            </a>
-        </p>
+     
+
       
         <!-- Footer-->
         <footer class="bg-light">
-            <div class="container">
+            
                 <div class="row" id="navbarResponsive">
                
                   
-                        <div class="col-lg-11"> <a class="nav-link js-scroll-trigger" href=" {% url 'store:copyright' %}"><h6>Copyright</h6> </a></div>
-                        <div class="col-lg-1"><a class="nav-link js-scroll-trigger" href="/#contact"><h6 text-right>Contact</h6></a></div>                       
+                        <div class="col-lg-4"> <a class="nav-link js-scroll-trigger" href=" {% url 'store:copyright' %}" title="copyright" alt="copyright"><h6>Copyright</h6> </a></div>
+                        <div class="col-lg-6">
+                            <a href="http://jigsaw.w3.org/css-validator/check/referer">
+                            <img style="border:0;width:88px;height:31px"
+                                src="http://jigsaw.w3.org/css-validator/images/vcss-blue"
+                                alt="CSS Valide !" />
+                            </a>
+                        </div>
+                        <div class="col-lg-2"><a class="nav-link js-scroll-trigger" href="/#contact"><h6 text-right>Contact</h6></a></div>                       
                     
                 </div>
-            </div>
+            
        </footer>
         <!-- Bootstrap core JS-->
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -86,5 +88,6 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
         <!-- Core theme JS-->
         <script src="{% static 'store/js/scripts.js' %}"></script>
+    </div>
     </body>
 </html>

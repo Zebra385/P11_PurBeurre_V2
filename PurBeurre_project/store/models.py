@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Categories(models.Model):
     """
-    # First class to put the categorie of the product on the site openfoodfacts
+    First class to loadthe categorie of the product on the site openfoodfacts
     """
     name_category = models.CharField(max_length=100, unique=True)
 
@@ -15,11 +15,9 @@ class Categories(models.Model):
         verbose_name = "Categories"
 
 
-# Second class to put lot of product of each categories
-# on the site openfoodfacts
 class Products(models.Model):
     """
-    Second class to put lot of product of each categories
+    Second class to load lot of product of each categories
     on the site openfoodfacts
     """
     name_product = models.CharField(max_length=150, unique=True)
@@ -46,6 +44,5 @@ class Attributs(models.Model):
         )
     attribut_choice = models.ForeignKey(Products, on_delete=models.CASCADE)
 
-    
     class Meta:
         verbose_name = "Attributs"

@@ -3,75 +3,77 @@ from django.core.management.base import BaseCommand
 from store.models import Categories, Products
 import requests
 
+
+def package_json(url):
+    """
+    Function to return data in format json
+    with a request from an url
+    """
+
+    r = requests.get(url)
+    return r.json()
+
+def package_product(name_category):
+    """ function to load in data base the products"""
+
+    # k is the number of the page on the site openfoodfacts
+            for k in range(1, 20):
+            
+                # we load the different products in the same category
+                package_json_product = package_json(f'https://fr.openfoodfacts.org/category/{name_category}/{k}.json')
+                # we need categorie_id like a foreign key for data base Products
+                categorie_id = int(Categories.objects.get(name_category=name_category).id)
+                        
+                # We take max 40 products per page
+                for j in range(1, 40):
+                  
+                    
+                    try:
+                        name_product = package_json_product['products'][j]['product_name']
+                            
+                        try:                   
+                            Products.objects.update_or_create(
+                                name_product=name_product,
+                                nutriscore_product=package_json_product['products'][j]['nutriscore_grade'],
+                                store_product=package_json_product['products'][j]['stores'],
+                                picture= package_json_product['products'][j]['image_url'],
+                                url_site=package_json_product['products'][j]['url'] ,
+                                categorie_id=categorie_id,
+                                )
+                            
+                        except Products.DoesNotExist:
+                            pass
+
+                        except ValueError:
+                            pass
+                    except:
+                        pass
+
+
 class Command(BaseCommand):
     
-    help = 'Va permettre de remplir les tables de notre base de données'
+    help = 'Va permettre de remplir les tables(Categories et Products) de notre base de données'
 
+   
     def handle(self, *args, **options):
         
-        r1 = requests.get('https://fr.openfoodfacts.org/categories.json')
-        packages_json_categories = r1.json()
+        # we load the different categories
+        packages_json_categories = package_json('https://fr.openfoodfacts.org/categories.json')
         
         
         # we take in table  store_Catégories the categories
-        for i in range(1, 200):
-            # If key don't exist in the file json
-                    #  to avoid mystake
-           
+        for i in range(1, 4):
+                     
             name_category = packages_json_categories['tags'][i]['name']
             
-           
-            Categories.objects.create(name_category=name_category)
-            for k in range(1, 20):
-                
-                package_url = \
-                    f'https://fr.openfoodfacts.org/category/{name_category}/{k}.json'
-                try:
-                    r2 = requests.get(package_url)
-                
-                    package_json_product = r2.json()
-                    
-                    categorie_id = int(Categories.objects.get(name_category=name_category).id)
-                            
-                    
-                    for j in range(1, 40):
-                        # If key don't exist in the file json
-                        #  to avoid mystake
-                        
-                        try :
-                            name_product = package_json_product['products'][j]['product_name']
-                        
-                            try:
-                                nutriscore_product = package_json_product['products'][j]['nutriscore_grade']
-                            except:
-                                nutriscore_product ="?"
-                            try:
-                                store_product =  nutriscore_product = package_json_product['products'][j]['stores_tags']
-                            except:
-                                store_product = "Inconnu"
-                            try:
-                                site_url= package_json_product['products'][j]['url'] 
-                            except:
-                                site_url= "https://fr.openfoodfacts.org/"
-                            try:
-                                picture = package_json_product['products'][j]['image_url']
-                            except :
-                                picture= "?"          
-                                               
-                            Products.objects.create(
-                                name_product=name_product,
-                                nutriscore_product=nutriscore_product,
-                                store_product=store_product,
-                                picture= picture,
-                                url_site=site_url,
-                                categorie_id=categorie_id)
-                            product_id=int(Products.objects.get(name_product=name_product).id)   
-                            print('l id du produit est:',product_id)
-                        except:
-                            continue
+            # We fill the data base store.Categories
+            Categories.objects.update_or_create(name_category=name_category)
+            package_product(name_category)
 
-                except:
-                    continue   
-                        
-               
-            
+        # we add in tables the category "Pâtes à tartiner aux noisettes" to be sur that the product "nutella" exist in own data basePâtes à tartiner aux noisettes"
+        for i in range(1, 4):
+                     
+            name_category = "Pâtes à tartiner aux noisettes"
+            # We fill the data base store.Categories
+            Categories.objects.update_or_create(name_category=name_category)
+            package_product(name_category)
