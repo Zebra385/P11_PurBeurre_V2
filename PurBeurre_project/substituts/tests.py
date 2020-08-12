@@ -2,15 +2,11 @@ from django.test import TestCase, RequestFactory
 from django.test import Client
 from django.urls  import reverse
 from django.contrib.auth.models import User, AnonymousUser
-from .models import Categories, Products, Attributs
-from .views import AccueilView
+from store.models import Categories, Products, Attributs
+
 from .views import AlimentListView
-
+from .views import SauvegardeView
 # Create your tests here.
-
-
-    
-
 class AlimentTestCase(TestCase):
 
     def setUp(self):
@@ -51,3 +47,47 @@ class AlimentTestCase(TestCase):
        
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
+
+#Detail save a substitut in datadabase Attribut
+class SauvegardeTestCase(TestCase):
+
+    def setUp(self):
+         # Every test needs access to the request factory.
+        self.factory = RequestFactory()
+        self.user = User.objects.create_user(
+            username='jacob', email='jacob@…', password='top_secret')
+        
+
+
+        pate = Categories.objects.create(name_category='pate')
+        self.category = Categories.objects.get(name_category='pate')
+        id_category = int(self.category.id)
+        Products.objects.create(name_product='Ravioli', categorie_id=id_category)
+        self.product = Products.objects.get(name_product='Ravioli')
+       
+      
+    # test if a user is connect
+    def test_user_exist(self):
+        request= self.factory.post('/store/details', data={'choice': 1,})
+        request.user= AnonymousUser()
+        print('le request.user est : ', request.user)
+        self.product = Products.objects.get(name_product='Ravioli')
+        attribut_choice = self.product.name_product
+        response = SauvegardeView.as_view()(request)
+        # code 302 because redirection to the login page
+        self.assertEqual(response.status_code, 302)
+
+    #test the dowload in data base Attributs when the user is connect
+    def test_load_attribut(self):
+       
+        request= self.factory.post('/store/aliment', data={'choice': 1,})
+        request.user= self.user
+        
+        Products.objects.get(name_product='Ravioli')
+        print(' dans test load attribut le request.user est : ', request.user.id)
+        
+        
+        response = SauvegardeView.as_view()(request)
+        # code 302 because redirection to the store/aliment
+        self.assertEqual(response.status_code, 302)
+      
