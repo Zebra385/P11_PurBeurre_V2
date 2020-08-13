@@ -17,33 +17,21 @@ from django.conf import settings
 from django.conf.urls import url
 from django.urls import include,  path
 from django.contrib import admin
-from store import views
 from store.views import AccueilView
-from django.contrib import admin
-from django.urls import path, include
-from django.views.generic import TemplateView
-from django.contrib.auth.views import LoginView
-
-
 
 
 urlpatterns = [
-	url(r'^$', AccueilView.as_view(), name="accueil"),
-	# importation of the urls from app store
-	url(r'^store/', include('store.urls')),
+    url(r'^$', AccueilView.as_view(), name="accueil"),
+    # importation of the urls from app store
+    url(r'^store/', include('store.urls')),
     #  importation of the url from app accounts
     url(r'^accounts/', include('accounts.urls')),
     #  importation of the url from app substituts
     url(r'^substituts/', include('substituts.urls')),
-	# to create news users
-	# url(r'^register$', register),
     url('admin/', admin.site.urls),
-    
     path('store/', include('django.contrib.auth.urls')),
-    
-    
     ]
-
+# Import toolbar to help to debug
 if settings.DEBUG:
     import debug_toolbar
     urlpatterns = [

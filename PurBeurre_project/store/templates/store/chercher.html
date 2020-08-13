@@ -1,39 +1,26 @@
-<!-- Masthead-->
+<!-- We show the form to research a product-->
 <header class="masthead" id="Chercher">
     <div class="container h-100">
         <div class="row h-50 align-items-center justify-content-center text-center">
             <div class="col-lg-12 ">
-                <hr>
-                </br>
-                </br>
+                <hr> </br> </br>
                 <h1 class="text-uppercase text-white font-weight-bold">Du gras, oui mais de qualité !</h1>
                 </br>
                 <h2 class="text-uppercase text-white font-weight-bold"> Trouver un produit de substitution pour ceux que vous consommez tous les jours.</h2>
-                
             </div>
-       
+            <!--The research form-->
         	<form   action="store/search_product/" method="get" accept-charset="utf-8">
-                <div class="form-inline">
-    	    
-    	             
-
-    		
-                    
+                <div class="form-inline">	                    
                 <label  for="{{form.name.id_for_label}}" ></label>
                 
                 {{form.name_product }}
                 
-                
-    	             <button type="submit" class=" btn btn-success ">Chercher</button>
-               
+    	        <button type="submit" class=" btn btn-success ">Chercher</button>
                 </div>
                 <div >
                     <span class="help-block" id="helpBlock"><h6 class="text-uppercase text-white font-weight-bold"> Trouvez le substitut de votre produit en tapant son nom.</h6></span>
                 </div>
             </form>
-          
-		</div>
-			
-    	
+		</div>	
     </div>
 </header>

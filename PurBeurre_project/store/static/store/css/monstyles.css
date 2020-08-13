@@ -13,6 +13,9 @@ html {
 #presentation_utilisateur{
 	height: 25vh;
 	}
+#presentation_copyright{
+	height: 25vh;
+	}
 #presentation_email{
 	height: 25vh;
 	background-color: #e8a75d;

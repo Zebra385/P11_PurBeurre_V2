@@ -1,41 +1,24 @@
-from django.shortcuts import render,redirect, get_object_or_404
-
-from django.contrib.auth import authenticate, login, logout
-# from .forms import CreateUserForm
-
+from django.http import HttpResponseRedirect
+from django.contrib.auth import logout
 from django.views.generic.base import View
 
 # Create your views here.
 
 
-# That will be use in th second version to can register evrybody
-"""
-def registration(request):
-    form = CreateUserForm(request.POST)
-    if request.method == 'POST':
-        if form.is_valid():
-            form.save()
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            login((request, user))
-            return HttpResponseRedirect("/")
-    else:
-        form = CreateUserForm()
-        context = {'form': form}
-        return render(request, 'registration/register.html', context)
-"""
-
 class LoginView(View):
-    template_name = 'registration/login.html'
-    
+    """
+    That class to login a user of the site
+    who are in the data base user admin
+    """
 
-    
+    template_name = 'registration/login.html'
+
 
 class LogoutView(View):
+    """ That class to login out a user of site"""
 
-    def post(self,request):
+    def post(self, request):
         print('je vais me logout')
         logout(request)
-        # Redirect to a success page.
+        # Redirect to a accueil page.
         return HttpResponseRedirect('/')

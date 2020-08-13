@@ -3,39 +3,29 @@
 {% block title %} Page de résultats {% endblock %}
 
 {% block content %}
-<!-- Affichage produit chercher -->
+<!-- We print the selected product-->
 
 
 	 {% include 'store/produit.html' %}  
 
 
-<!-- Portfolio-->
+
 <section class="page-section" id="produits">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-lg-12 text-center">
                 <h2 >Vous pouvez remplacer cet aliment par:</h2>
-            </br>
+                </br>
             </div>
         </div>
     </div>
 
-    <!-- List des aliments proposés -->
-        
-    
+    <!-- We show the result of research with a list-->
     <div class="row justify-content-center">
+
    		{% include 'store/list.html' %} 
+
 	</div>
-    
-    
-   
-
-
- 
-   
 </section>
-
-
-
 
 {% endblock %}

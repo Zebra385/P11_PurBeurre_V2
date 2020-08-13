@@ -4,7 +4,7 @@ from django.conf import settings
 
 class Categories(models.Model):
     """
-    First class to loadthe categorie of the product on the site openfoodfacts
+    First class to load the categorie of the product on the site openfoodfacts
     """
     name_category = models.CharField(max_length=100, unique=True)
 
@@ -12,6 +12,9 @@ class Categories(models.Model):
         return self.name_category
 
     class Meta:
+        """
+        That class to can choice a name of our database in  mode admin
+        """
         verbose_name = "Categories"
 
 
@@ -36,7 +39,7 @@ class Products(models.Model):
 
 class Attributs(models.Model):
     """
-    Fird class to save the attribut choice by a person
+    Fird class to save the attribut choice by the user
     """
     name_person = models.ForeignKey(
         settings.AUTH_USER_MODEL,

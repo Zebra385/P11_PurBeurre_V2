@@ -17,4 +17,3 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Attributs)
 class AttributAdmin(admin.ModelAdmin):
     pass
-    

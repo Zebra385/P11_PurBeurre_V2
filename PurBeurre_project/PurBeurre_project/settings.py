@@ -81,12 +81,12 @@ WSGI_APPLICATION = 'PurBeurre_project.wsgi.application'
 
 DATABASES = {
     'default': {
-    	# We use the adaptater for postgresqlpostgresql
+        # We use the adaptater for postgresqlpostgresql
         'ENGINE': 'django.db.backends.postgresql',
         # The name of database xhose is create befor
-        'NAME': 'db_purbeurre', 
+        'NAME': 'db_purbeurre',
         # The user must be replave by your own name
-        'USER': 'adm_postgres', 
+        'USER': 'adm_postgres',
         'PASSWORD': 'maevateddy',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -143,4 +143,3 @@ TEMPLATES[0]['DIRS'] = [os.path.join(BASE_DIR, 'template')]
 LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
-#LOGIN_REDIRECT_URL = "copyright: store/accueil/"

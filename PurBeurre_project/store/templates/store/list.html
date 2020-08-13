@@ -1,8 +1,10 @@
+<!--We are begining by know if the user is connecting: If he is not we print a text message present in the variable text-->
 {% if text is None %}
-
+	<!-- We show the result of th resarch in data base-->
 	{% for essai in essais %}
 	    <div class="col-sm-4 ">
 	    	{% load static %}
+	    	<!--We use a form if the user want to load one substit in the database Substituts-->
 	    	<form  action="{% url 'substituts:sauvegarde' %}" method="post">
 	    		{% csrf_token %}
 				
@@ -26,17 +28,16 @@
 		        <h3><a>{{ essai.name_product }}</a></h3>
 		        <input type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
 		        <input type="submit" value="Sauvegarder">
-	   		</form>
-
-		        
+	   		</form>   
 		</div>
-		  {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+		<!-- We put three results per ligne when the screen is enough big-->
+		{% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
 	{% endfor %}
 {%else%}
-	
-		<div class="col-lg-12 text-center" id='alerte'>
-	        <h2 class="text-danger">{{text}}</h2>
-	        <hr>
-	    </div>
+	<!-- If the user does not be connect, we call him to login-->
+	<div class="col-lg-12 text-center" id='alerte'>
+        <h2 class="text-danger">{{text}}</h2>
+        <hr>
+    </div>
 	    
 {% endif%}

@@ -3,8 +3,9 @@
 {% block title %} Bienvenue Chez Pur_Beurre {% endblock %}
 {% block content %}
 	{% load static %}
-	<!-- Masthead-->
+	<!--We are begining by know if the product exist: If do not exist we print a text message present in the variable text-->
 	{% if text is None %}
+		<!-- We include the form to research an product-->
  		{% include 'store/chercher.html' %}
 	{%else%}
 		<hr>
@@ -15,10 +16,10 @@
 	    {% include 'store/chercher.html' %}
     {% endif%}
 
-	<!-- Présentation-->
+	<!-- We include Présentation-->
  	{% include 'store/presentation.html' %}
 
- 	<!-- Contact-->
+ 	<!-- We include Contact-->
  	{% include 'store/contact.html' %}
 
 {% endblock %}
