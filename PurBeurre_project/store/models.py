@@ -43,7 +43,7 @@ class Attributs(models.Model):
     """
     name_person = models.ForeignKey(
         settings.AUTH_USER_MODEL,
-        default=1, on_delete=models.CASCADE
+        on_delete=models.CASCADE
         )
     attribut_choice = models.ForeignKey(Products, on_delete=models.CASCADE)
 
