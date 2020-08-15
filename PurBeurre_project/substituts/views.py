@@ -55,7 +55,7 @@ class SauvegardeView(View):
         print('Dans sauvegarde attribut_choice est : ', attribut_choice)
         # We load the datas in database
         load_choice = Attributs.objects.create(
-            name_person_id=name_person_id,
+            auth_user_id=name_person_id,
             attribut_choice=attribut_choice,
             )
         # After we load the choice of substitut we return to page aliment

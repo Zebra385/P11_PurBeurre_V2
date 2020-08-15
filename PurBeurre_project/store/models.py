@@ -1,5 +1,5 @@
 from django.db import models
-from django.contrib.auth import get_user_model
+from django.conf import settings
 
 
 class Categories(models.Model):
@@ -41,8 +41,8 @@ class Attributs(models.Model):
     """
     Fird class to save the attribut choice by the user
     """
-    name_person = models.ForeignKey(
-        get_user_model(),
+    auth_user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         )
     attribut_choice = models.ForeignKey(Products, on_delete=models.CASCADE)
