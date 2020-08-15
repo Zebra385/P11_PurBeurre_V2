@@ -24,7 +24,7 @@ class AlimentListView(ListView):
 
     def get_queryset(self):
         self.substituts = Attributs.objects.filter(
-            name_person_id=self.request.user)
+            auth_user_id=self.request.user)
         return self.substituts
 
     def get_context_data(self):
