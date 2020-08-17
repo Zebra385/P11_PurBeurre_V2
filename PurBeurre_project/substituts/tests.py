@@ -23,15 +23,15 @@ class AlimentTestCase(TestCase):
         self.product2 = Products.objects.create(name_product="Ravioli bio3",
                                                 nutriscore_product="a",
                                                 categorie_id=id_category)
-        Attributs.objects.create(auth_user=self.user,
+        Attributs.objects.create(auth_user_id=self.user,
                                  attribut_choice=self.product1)
-        Attributs.objects.create(auth_user=self.user,
+        Attributs.objects.create(auth_user_id=self.user,
                                  attribut_choice=self.product2)
 
     # test the context data
     def test_environment_set_in_context(self):
 
-        request = RequestFactory().get('/', data={'auth_user': self.user})
+        request = RequestFactory().get('/', data={'auth_user_id': self.user})
         request.user = self.user
         view = AlimentListView()
         view.setup(request)

@@ -45,8 +45,8 @@ class SauvegardeView(View):
 
     def post(self, request):
         # we take the id of the person who is connect
-        name_person_id = int(request.user.id)
-        print('Dans name_person_id:', name_person_id)
+        auth_user_id = int(request.user.id)
+        print('Dans name_person_id:', auth_user_id)
         # We select the choice
         selected_choice = request.POST.get('choice')
         print('Dans sauvegarde selection:', selected_choice)
@@ -55,7 +55,7 @@ class SauvegardeView(View):
         print('Dans sauvegarde attribut_choice est : ', attribut_choice)
         # We load the datas in database
         load_choice = Attributs.objects.create(
-            auth_user_id=name_person_id,
+            auth_user_id=auth_user_id,
             attribut_choice=attribut_choice,
             )
         # After we load the choice of substitut we return to page aliment
