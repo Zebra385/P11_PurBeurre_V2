@@ -78,7 +78,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'PurBeurre_project.wsgi.application'
+WSGI_APPLICATION = 'PurBeurre_project.PurBeurre_project.wsgi.application'
 
 
 # Database
