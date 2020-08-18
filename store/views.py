@@ -40,7 +40,7 @@ class SearchProductView(ListView):
         else:
             self.name_product = None
         try:
-            self.product = Products.objects.get(name_product=self.name_product)
+            self.product = Products.objects.get(name_product__iexact=self.name_product)
             self.categori_produit = self.product.categorie
             # To filter we looking for product than have the same category
             # And we oder the list wiht the nutriscore of each product

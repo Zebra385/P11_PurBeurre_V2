@@ -3,6 +3,7 @@ from django.contrib.auth.models import User, AnonymousUser
 from store.models import Categories, Products, Attributs
 from .views import AlimentListView
 from .views import SauvegardeView
+from django.urls import reverse
 # Create your tests here.
 
 
@@ -17,22 +18,24 @@ class AlimentTestCase(TestCase):
         self.category = Categories.objects.get(name_category='pate')
         id_category = int(self.category.id)
         self.name_product = 'Ravioli'
-        self.product1 = Products.objects.create(name_product=self.name_product,
+        product1 = Products.objects.create(name_product=self.name_product,
                                                 nutriscore_product="d",
                                                 categorie_id=id_category)
-        self.product2 = Products.objects.create(name_product="Ravioli bio3",
+        product2 = Products.objects.create(name_product="Ravioli bio3",
                                                 nutriscore_product="a",
                                                 categorie_id=id_category)
-        Attributs.objects.create(auth_user_id=self.user,
-                                 attribut_choice=self.product1)
-        Attributs.objects.create(auth_user_id=self.user,
-                                 attribut_choice=self.product2)
+        Attributs.objects.create(auth_user_id=self.user.id,
+                                 attribut_choice=product1)
+        Attributs.objects.create(auth_user_id=self.user.id,
+                                 attribut_choice=product2)
 
     # test the context data
     def test_environment_set_in_context(self):
 
         request = RequestFactory().get('/', data={'auth_user_id': self.user})
         request.user = self.user
+        print('self.user est ', self.user)
+
         view = AlimentListView()
         view.setup(request)
         # we fix the object _list because we do not call
@@ -76,6 +79,7 @@ class SauvegardeTestCase(TestCase):
         response = SauvegardeView.as_view()(request)
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, 'store:login')
 
     # test the dowload in data base Attributs when the user is connect
     def test_load_attribut(self):
@@ -86,3 +90,4 @@ class SauvegardeTestCase(TestCase):
         response = SauvegardeView.as_view()(request)
         # code 302 because redirection to the store/aliment
         self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response, 'substituts:aliment')
