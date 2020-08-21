@@ -30,6 +30,7 @@ urlpatterns = [
     url(r'^substituts/', include('substituts.urls')),
     url('admin/', admin.site.urls),
     path('store/', include('django.contrib.auth.urls')),
+    path('accounts/', include('django.contrib.auth.urls')),
     ]
 # Import toolbar to help to debug
 if settings.DEBUG:

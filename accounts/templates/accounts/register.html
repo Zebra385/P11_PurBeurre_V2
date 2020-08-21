@@ -1,0 +1,36 @@
+{% extends "store/base.html" %}
+{% block title %} S'incrire {% endblock %}
+
+{% block  content%} 
+
+<div class="container">
+    <h1></br></h1>
+    <h2 class="text-center mt-0">Entrer  un login et un mot de passe<h2>
+<!--form method="post" action="{% url 'accounts/login/' %}"-->
+<form method="post" action="accounts/register">
+{% csrf_token %}
+<table>
+    <tr>
+        <td>{{ form.username.label_tag }}</td>
+        <td>{{ form.username }}</td>
+    </tr>
+    <tr>
+        <td>{{ form.email.label_tag }}</td>
+        <td>{{ form.email }}</td>
+    </tr>
+    <tr>
+        <td>{{ form.password1.label_tag }}</td>
+        <td>{{ form.password1 }}</td>
+    </tr>
+     <tr>
+        <td>{{ form.password2.label_tag }}</td>
+        <td>{{ form.password2 }}</td>
+    </tr>
+    </table>
+
+</br>
+
+<input type="submit" value="register">
+<input type = "hidden" name = "next" value = "{{next}}" />
+</form>
+{% endblock %}

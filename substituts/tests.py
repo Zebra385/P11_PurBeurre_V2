@@ -85,7 +85,7 @@ class SauvegardeTestCase(TestCase):
     def test_load_attribut(self):
         request = self.factory.post('/store/aliment', data={'choice': 1, })
         request.user = self.user
-        Products.objects.get(name_product='Ravioli')
+        
         print(' dans test load attribut le request.user est : ', request.user.id)
         response = SauvegardeView.as_view()(request)
         # code 302 because redirection to the store/aliment

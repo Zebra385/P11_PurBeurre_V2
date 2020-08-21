@@ -16,7 +16,7 @@
 </header>
 
 
-<form method="post" action="">
+<form method="post" action="accounts/login/">
     {% csrf_token %}
     <table>
     <tr>
@@ -31,7 +31,7 @@
 
     <input type="submit" value="login">
     
-    <!--input type="hidden" name="next" value="{{ next }}"-->
+    <input type="hidden" name="next" value="{{ next }}">
     {% if form.errors %}
     <p>Your username and password didn't match. Please try again.</p>
     {% endif %}
@@ -43,14 +43,19 @@
         {% else %}
         <div class="col-lg-12 text-center" id='alerte'>
             <h2 class="text-danger">Vous devez être connecté pour sauvegarder un substitut</h2>
+            <h2> Next vaut {{next}}</h2>
             <hr>
         </div>
         
         {% endif %}
     {% endif %}
 </form>
-<div class = "text-xs-center"> <small> Vous n'avez pas de compte? <a href = "{% url 'accounts:inscription' %} {% if next%}? next = {{next}} {% endif%}"> Inscription </ a> </ small> </ div>
-<!--p><a href="{% url 'accounts:inscription' %}">Nouvel utilisateur S'insrire</a></p-->
+<form action="{% url 'accounts:register' %} {% if next%}? next = {{next}} {% endif%}">
+    <div class = "text-xs-center"> <small> Vous n'avez pas de compte? 
+    <button type="submit" class="btn btn-success">S'inscrire</button>
+
+</div>
+</form>
 
 {# Assumes you setup the password_reset view in your URLconf #}
 <!--p><a href="{% url 'password_reset' %}">Lost password?</a></p-->
