@@ -1,3 +1,6 @@
+body{ 
+width: 100%;
+ }
 title{
   font-family: "Open Sans", sans-serif;
 }
@@ -7,9 +10,7 @@ html {
 #produits{
 	background-color: #e8a75d;
 }
-#presentation{
-	background-color: #e8a75d;
-}
+
 #presentation_utilisateur{
 	height: 25vh;
 	}
@@ -20,18 +21,47 @@ html {
 	height: 25vh;
 	background-color: #e8a75d;
 	}
-#chercher{
-	height: 25vh;
+.decorator_header{
+	padding-top: 10rem;
+	height: 5em;
+	min-height: 5em;
+	background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/kawin-harasai-k60JspcBwKE-unsplash.jpg");
+	
 	}
 
-header{
+
+
+.decorator2_fond{
 	background-color: #86ebe6;
 }
-
-#contact{
-	background-color: #86ebe6;
+.decorator1_fond{
+	background-color: #e8a75d;
 }
+.decorator1{
 
+	padding-top: 4em;
+	padding-bottom: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	background-color: #ffffff;
+	opacity: 0.6;
+}
+.decorator2{
+	margin-top: 4em;
+	padding-top: 1.5em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+	background-color: #000000;
+	opacity: 0.5;
+}
+.figure{
+	height: 10em;
+	border: 3px solid #ccc;
+  	border-radius: 4px;
+  	box-shadow: 6px 6px 0px black;
+	
+}
 ul.errorlist {
 margin-left: 160px;
 padding: 0;
@@ -48,38 +78,55 @@ form label{
 form input[type="email"], form input[type="text"],
 form input[type="password"]{
 	display: block;
+	float: center;
 	width: 250px;
 	padding: 2px;
+	margin: .5rem;
 }
-form input[type="submit"]{
-	margin: 0 20px 0 160px;
-	border-style: solid;
-	border-width: 1px;
-	background-color: #86ebe6;
-	color: #FFFFFF;
-	padding: 2px 15px 3px 15px;
-	text-align: center;
-}
+
 a{
 	color: #3b5998;
 }
-
-.parent {
-  position: relative;
-  top: 0;
-  left: 0;
+.decorator3{
+	
+	height: 15em;
+	
+	margin: 2%;
+	padding: 2%;
+	
+	
+	
 }
+.parent {
+	position: relative;
+	top: 0;
+	left: 0;
+	border: 3px solid #ccc;
+  	border-radius: 4px;
+	box-shadow: 6px 6px 0px black;
+	width: 100%; 
+
+}
+
 .image1 {
-  position: relative;
-  top: 0;
-  left: 0;
-  width: 100%;
+	position: relative;
+	top: 0;
+	left: 0;
+	
+	height:10em;
 }
 .image2 {
-  position: absolute;
-  top: 0px;
-  right: 0px;
+	position: absolute;
+	top: 0px;
+	right: 0px;
  }
+.image3 {
+	position: relative;
+	top: 0;
+	left: 0;
+	
+} 
+
 #site{
 	background-color: #86ebe6;
 }
@@ -88,4 +135,67 @@ a{
 }
 #aliment_footer{
 	background-color: #de9440;
+}
+#choice{
+	display: block;
+	float: center;
+	text-align: center;
+	padding: 2px;
+}
+.list{
+	margin:10%;
+}
+.parent_form {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin:10%;
+	border: 3px solid #ccc;
+  	border-radius: 4px;
+	box-shadow: 6px 6px 0px black;
+	height: 14rem;
+
+}
+
+.image1_form {
+	position: relative;
+	margin:.5rem;
+	padding:.5rem;
+	max-height: 10rem;;
+	
+
+	
+}
+
+.parent_product {
+	position: relative;
+	top: 0;
+	left: 0;
+	border: 3px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 6px 6px 0px black;
+	height: 100%; 
+
+}
+.image4 {
+	position: relative;
+	top: .1rem;
+	
+
+	
+}
+.image5 {
+	position: absolute;
+	top: 12rem;
+	background-color: #86ebe6;
+	
+}
+form h4{
+	max-height: 1em;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+form input{
+	margin-left: 25%;
 }

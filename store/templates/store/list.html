@@ -1,15 +1,20 @@
 <!--We are begining by know if the user is connecting: If he is not we print a text message present in the variable text-->
-{% if text is None %}
+{% if essais%}
+	<!-- If the user does not be connect, we call him to login-->
+	
 	<!-- We show the result of th resarch in data base-->
 	{% for essai in essais %}
+	
 	    <div class="col-sm-4 ">
+        
 	    	{% load static %}
 	    	<!--We use a form if the user want to load one substit in the database Substituts-->
-	    	<form  action="{% url 'substituts:sauvegarde' %}" method="post">
+	    	
+	    	<form  class="h-75 parent_form" action="{% url 'substituts:sauvegarde' %}" method="post">
 	    		{% csrf_token %}
 				
-		        <div class="parent">
-			        <img class="img-responsive image1" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+		        
+			        <img class="img-responsive image1_form h-60 w-100" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
 			        
 			        {% if essai.nutriscore_product == "a" %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
@@ -24,20 +29,44 @@
 			        {% else %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
 			        {% endif %}
-		    	</div>
-		        <h3><a>{{ essai.name_product }}</a></h3>
-		        <input type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
-		        <input type="submit" value="Sauvegarder">
+		    	
+		        <h4 class="formh4 text-center"><a>{{ essai.name_product }}</a></h4>
+		        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
+		        <input  class="form-control w-50" type="submit" value="Sauvegarder">
 	   		</form>   
+	   	
 		</div>
 		<!-- We put three results per ligne when the screen is enough big-->
-		{% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+		{% if forloop.counter|divisibleby:3 %}<div class="clearfix w-75"></div>{% endif %}
+				
 	{% endfor %}
+			
+	
+	{%if is_paginated%}
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if page_obj.has_previous %}
+	            <a href="?page=1">&laquo; first</a>
+	            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+	        {% endif %}
+
+	        <span class="current">
+	            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+	        </span>
+
+	        {% if page_obj.has_next %}
+	            <a href="?page={{ page_obj.next_page_number }}">next</a>
+	            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+	        {% endif %}
+	    </span>
+	</div>
+
+	{%endif%}
 {%else%}
-	<!-- If the user does not be connect, we call him to login-->
 	<div class="col-lg-12 text-center" id='alerte'>
-        <h2 class="text-danger">{{text}}</h2>
-        <hr>
+        <h2 class="text-danger">Produit absent de la base de données\
+                         RETOURNER A L ACCUEIL</h2>
     </div>
-	    
-{% endif%}
+		
+
+{%endif%}

@@ -3,58 +3,115 @@
 {% block title %} Page aliment(s){% endblock %}
 
 {% block content%}
+{% load static %}
+<!-- Masthead-->
+<!-- We print the selected product-->
+<header class="masthead decorator_header parent_product">
+	<div class="container-fluid image4 " >
+		<div class="row  align-items-center justify-content-center text-center decorator2">
+		<div class="image5">
+			<h1 class="text-uppercase text-blue font-weight-bold ">Voici la liste de mes substituts enregistrés</h1>
+		    </h1>
+		</div>  
+		</div>
+	</div>
+
+</header>
 <!--We are begining by know if the user is connecting: If he is not we print a text message present in the variable text-->
-{% if text is None %}
+{% if attributs_list %}
     <!-- We show the possible substituts to replace the choice product-->
-    {% for essai in list_substituts %}
-    <header>.
-    	</header>
-    <!--we print the choice product -->
-    <section class="page-section"  id="aliment_header">
-        <img class="d-block mx-auto" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
-            <div class="row h-25 align-items-center justify-content-center text-center">
-                <div class="col-lg-11 ">
-                    <h1 class="text-uppercase text-white font-weight-bold">le produit est :  {{essai.name_product}} </h1>
-                    </br>
-                </div>   
+    <section class="page-section" id="produits" >
+        <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-12 text-center">
+                <h2 >Accéder aux détails du produit en cliquant sur le bouton bleu "Openfoodfacts"</h2>
+                </br>
             </div>
+        </div>
+    </div>
+        <div class="row list">
+            {% for essai in attributs_list %}
+            <!-- We show the possibilty of substituts-->
+            
+                
+                    <div class="col-sm-4">
+                    <div  class="h-75 parent_form" >
+                        <img class="img-responsive image1_form h-60 w-100" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+                        <h5 class="formh4 text-center"> {{essai.name_product}} </h5>     
+                        <div class="row">
+                            <div class="col-lg-6 text-center">
+                                
+                                    <!--Nutriscore substitut-->
+                                    <h5 class="h5 mb-2">Nutriscore : <B>{{essai.nutriscore_product| upper}}</B></h5>
+                                
+                            </div>
+                            <div class="col-lg-6 ">
+                                                       
+                                    <!--Nutrionel ingredients per 100g-->
+                                    <h5>Repères nutritionnel pour 100g</h5>
+                                
+                            </div>
+                        </div>
+
+               
+                            <!-- url openfoodfacts to see the choice product-->
+                            <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.url_site}}"><h5 >Openfoodfacts</h5></a>
+                            </div>
+                        
+                    </div>
+                
+            {% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+        </div>
+        {% endfor %}
     </section>
-    <!-- We show the possibilty of substituts-->
-    <section class="page-section" id="aliment_footer">               
-        <hr class="divider my-6" />
-        <div class="row">
-            <div class="col-lg-6 text-center">
-                <div class="mt-5">
-                    <!--Nutriscore substitut-->
-                    <h3 class="h4 mb-2">Nutriscore : <B>{{essai.nutriscore_product| upper}}</B></h3>
-            	</div>
-        	</div>
-            <div class="col-lg-6 ">
-                <div class="mt-5">                        
-                    <!--Nutrionel ingredients per 100g-->
-                	<h3>Repères nutritionnel pour 100g</h3>
-        		</div>
-    		</div>
-    	</div>
-    	<hr class="divider my-6" />
-        <div class="row">
-    	    <!-- url openfoodfacts to see the choice product-->
-    		<div class="col-lg-2" text-center > <h1>======> </h1></div>
-            <div class="col-lg-offset-4 col-lg-6 " text-center id="site"><a class="nav-link js-scroll-trigger" href="{{essai.url_site}}"><h2 >Voir la fiche d'openfoodfacts</h2></a>
-            </div>
-    	</div> 
-            	
-    </section> 
+    {%if is_paginated%}
+	<div class="pagination">
+	    <span class="step-links">
+	        {% if page_obj.has_previous %}
+	            <a href="?page=1">&laquo; first</a>
+	            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+	        {% endif %}
 
-    {% endfor %}
+	        <span class="current">
+	            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+	        </span>
 
+	        {% if page_obj.has_next %}
+	            <a href="?page={{ page_obj.next_page_number }}">next</a>
+	            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+	        {% endif %}
+	    </span>
+	</div>
+
+	{%endif%}
 <!-- If the user does not be connect, we call him to login-->
 {%else%}
-
-	<div class="col-lg-12 text-center" id='alerte'>
-        <h2 class="text-danger">{{text}}</h2>
-        <hr>
-    </div>
-  
+    <section class="page-section" >
+        <div class="col-lg-12 text-center" id='alerte'>
+            <h2 class="text-danger">{{text}}</h2>
+            <hr>
+        </div>
+    </section>
 {% endif%}
+{%if is_paginated%}
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+
+{%endif%}
+
 {% endblock %}

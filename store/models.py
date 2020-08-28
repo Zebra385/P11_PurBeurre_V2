@@ -15,7 +15,7 @@ class Categories(models.Model):
         """
         That class to can choice a name of our database in  mode admin
         """
-        verbose_name = "Categories"
+        verbose_name = "categorie"
 
 
 class Products(models.Model):

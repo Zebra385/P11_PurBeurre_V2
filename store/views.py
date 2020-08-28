@@ -4,10 +4,35 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from store.forms import ProductForm
 from django.views.generic import ListView
-
+from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # Create your views here.
 
 
+from django.views.generic.detail import SingleObjectMixin
+from store.models import Categories
+"""
+class CategoryProduct(SingleObjectMixin, ListView):
+  
+    We crete a special class to have a list that containts a special category
+    we can use this class to show the substitut of a product
+  
+    paginate_by = 9
+    template_name = 'store/categories_products.html'
+
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object(queryset=Categories.objects.all())
+        print('self.object vaut ', self.object)
+        return super().get(request, *args, **kwargs)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        print('self.object vaut ', self.object)
+        context['categories'] = self.object
+        return context
+
+    def get_queryset(self):
+        return self.object.products_set.all()
+"""
 class MoncompteView(TemplateView):
     """ That class to see who is connect or nobody"""
     template_name = 'store/moncompte.html'
@@ -63,4 +88,5 @@ class SearchProductView(ListView):
         kwargs['name_product'] = self.name_product
         kwargs['essais'] = self.essais
         kwargs['text'] = self.text
+        kwargs['picture']=self.product.picture
         return super(SearchProductView, self).get_context_data(**kwargs)

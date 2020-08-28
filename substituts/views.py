@@ -21,6 +21,9 @@ class AlimentListView(ListView):
     """
     model = Attributs
     template_name = 'store/aliment.html'
+    
+    context_object_name='attributs_list'
+    paginate_by = 3
 
     def get_queryset(self):
         self.substituts = Attributs.objects.filter(
@@ -30,7 +33,7 @@ class AlimentListView(ListView):
     def get_context_data(self):
         list_substituts = [substitut.attribut_choice
                            for substitut in self.substituts]
-        self.context = {'list_substituts': list_substituts}
+        self.context = {'attributs_list': list_substituts}
         return self.context
 
 
