@@ -1,0 +1,44 @@
+{% extends "store/base.html" %}
+
+{% block title %} Détails aliment{% endblock %}
+{% block content %}
+<!-- Masthead-->
+<!-- We print the selected product-->
+<header class="masthead decorator_header parent_product">
+	<div class="container-fluid image4 " >
+		<div class="row  align-items-center justify-content-center text-center decorator2">
+            <img class="img-responsive-center"  src="{{product.picture }}" alt="{{name_product}}">
+            <div class="image5">
+                <h3 class="text-uppercase text-blue font-weight-bold ">le produit est :  {{product.name_product}} </h1>
+                </h3>
+            </div>  
+		</div>
+	</div>
+    
+</header>
+             
+<section class="page-section" id="produits">
+    
+    <div  class="h-25 parent_form" >                  
+        <div class="row">
+            <div class="col-lg-6 text-center">
+                
+                    <!--Nutriscore substitut-->
+                    <h5 class="h5 mb-2">Nutriscore : <B>{{product.nutriscore_product| upper}}</B></h5>
+                
+            </div>
+            <div class="col-lg-6 ">
+                                        
+                    <!--Nutrionel ingredients per 100g-->
+                    <h5>Repères nutritionnel pour 100g</h5>
+                
+            </div>
+        </div>
+        <!-- url openfoodfacts to see the choice product-->
+        <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{product.url_site}}"><h5 >Openfoodfacts</h5></a>
+        </div>
+    
+    </div> 
+</section>
+    
+  {% endblock %} 

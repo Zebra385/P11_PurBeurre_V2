@@ -26,16 +26,16 @@ class AlimentListView(ListView):
     paginate_by = 3
 
     def get_queryset(self):
-        self.substituts = Attributs.objects.filter(
+       
+        return Attributs.objects.filter(
             auth_user_id=self.request.user)
-        return self.substituts
-
+    """
     def get_context_data(self):
         list_substituts = [substitut.attribut_choice
                            for substitut in self.substituts]
         self.context = {'attributs_list': list_substituts}
         return self.context
-
+    """
 
 @method_decorator(login_required(login_url='login'),
                   name='dispatch')

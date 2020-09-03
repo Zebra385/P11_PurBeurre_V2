@@ -3,7 +3,7 @@
 	<!-- If the user does not be connect, we call him to login-->
 	
 	<!-- We show the result of th resarch in data base-->
-	{% for essai in essais %}
+	{% for essai in essais%}
 	
 	    <div class="col-sm-4 ">
         
@@ -29,8 +29,8 @@
 			        {% else %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
 			        {% endif %}
-		    	
-		        <h4 class="formh4 text-center"><a>{{ essai.name_product }}</a></h4>
+			
+		        <h4 class="formh4 text-center" ><a href="{% url 'store:detail' pk=essai.id %}">{{ essai.name_product }}</a></h4> 
 		        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
 		        <input  class="form-control w-50" type="submit" value="Sauvegarder">
 	   		</form>   
@@ -42,26 +42,9 @@
 	{% endfor %}
 			
 	
-	{%if is_paginated%}
-	<div class="pagination">
-	    <span class="step-links">
-	        {% if page_obj.has_previous %}
-	            <a href="?page=1">&laquo; first</a>
-	            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-	        {% endif %}
-
-	        <span class="current">
-	            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-	        </span>
-
-	        {% if page_obj.has_next %}
-	            <a href="?page={{ page_obj.next_page_number }}">next</a>
-	            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-	        {% endif %}
-	    </span>
-	</div>
-
-	{%endif%}
+	
+	
+	
 {%else%}
 	<div class="col-lg-12 text-center" id='alerte'>
         <h2 class="text-danger">Produit absent de la base de données\

@@ -1,11 +1,12 @@
 from accounts.forms import CreatUserForm
 from django.http import HttpResponseRedirect
-from django.contrib.auth import logout, login
+from django.contrib.auth import logout, login, authenticate
 from django.views.generic.base import View
 from django.views.generic.base import TemplateView
 from django.shortcuts import render
 from django.contrib.auth.views import LoginView,LogoutView
 from accounts.forms import CreatUserForm
+from django.contrib.auth.models import User
 # Create your views here.
 
 
@@ -37,33 +38,38 @@ class LogoutView(LogoutView):
 
 class RegistrationView(View):
     form_class = CreatUserForm
-    initial = {'key': 'value'}
+    
     template_name = 'accounts/register.html'
 
     def get(self,request, *args, **kwargs):
-        form = self.form_class(initial=self.initial)
+        
+        form = self.form_class()
 
-        context = {'form': form, 'next': request.GET.get ('next', '')}
+        context = {'form': form}
+       
         return render(request, self.template_name, context)
 
     def post(self, request, *args,**kwargs):
         form = self.form_class(request.POST)
-        if request.method == 'POST':
-            if form.is_valid():
-                form.save()
-                username = form.cleaned_data['username']
-                email = form.cleaned_data['email']
-                password = form.cleaned_data['password1']
-                user = authenticate(username=username, password=password)
-                login((request, user))
-                return HttpResponseRedirect("/")
-            else:
-                context = {'form': form, 'next': request.GET.get('next', '')}
-                return render(request,  self.template_name, context)
+        
+        if form.is_valid():
+            user = form.save()
+            
+            username = form.cleaned_data['username']
+            print('username est:', username)
+            password = form.cleaned_data['password1']
+            email= form.cleaned_data['email']
+            
+            login(request,user,backend='django.contrib.auth.backends.ModelBackend')
+            
+            
+            return HttpResponseRedirect("/")
         else:
-            form = self.form_class()
-            context = {'form': form, 'next': request.GET.get('next', '')}
-            return render(request, self.template_name, context)
+            print('form est:non valid')
+            print(form.errors)
+            context = {'form': form}
+            return render(request,  self.template_name, context)
+       
 
     
 

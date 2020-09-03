@@ -1,6 +1,6 @@
 {% extends "store/base.html" %}
 
-{% block title %} Page aliment(s){% endblock %}
+{% block title %} Mes substituts{% endblock %}
 
 {% block content%}
 {% load static %}
@@ -18,7 +18,7 @@
 
 </header>
 <!--We are begining by know if the user is connecting: If he is not we print a text message present in the variable text-->
-{% if attributs_list %}
+{% if page_obj %}
     <!-- We show the possible substituts to replace the choice product-->
     <section class="page-section" id="produits" >
         <div class="container">
@@ -30,19 +30,19 @@
         </div>
     </div>
         <div class="row list">
-            {% for essai in attributs_list %}
+            {% for essai in page_obj %}
             <!-- We show the possibilty of substituts-->
             
                 
                     <div class="col-sm-4">
                     <div  class="h-75 parent_form" >
-                        <img class="img-responsive image1_form h-60 w-100" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
-                        <h5 class="formh4 text-center"> {{essai.name_product}} </h5>     
+                        <img class="img-responsive image1_form h-60 w-100" src="{{ essai.attribut_choice.picture }}" alt="{{ essai.name_product}}">
+                        <h5 class="formh4 text-center"> {{essai.attribut_choice.name_product}} </h5>     
                         <div class="row">
                             <div class="col-lg-6 text-center">
                                 
                                     <!--Nutriscore substitut-->
-                                    <h5 class="h5 mb-2">Nutriscore : <B>{{essai.nutriscore_product| upper}}</B></h5>
+                                    <h5 class="h5 mb-2">Nutriscore : <B>{{essai.attribut_choice.nutriscore_product| upper}}</B></h5>
                                 
                             </div>
                             <div class="col-lg-6 ">
@@ -55,7 +55,7 @@
 
                
                             <!-- url openfoodfacts to see the choice product-->
-                            <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.url_site}}"><h5 >Openfoodfacts</h5></a>
+                            <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.attribut_choice.url_site}}"><h5 >Openfoodfacts</h5></a>
                             </div>
                         
                     </div>
@@ -64,7 +64,7 @@
         </div>
         {% endfor %}
     </section>
-    {%if is_paginated%}
+    
 	<div class="pagination">
 	    <span class="step-links">
 	        {% if page_obj.has_previous %}
@@ -83,7 +83,7 @@
 	    </span>
 	</div>
 
-	{%endif%}
+	
 <!-- If the user does not be connect, we call him to login-->
 {%else%}
     <section class="page-section" >
@@ -93,25 +93,5 @@
         </div>
     </section>
 {% endif%}
-{%if is_paginated%}
-<div class="pagination">
-    <span class="step-links">
-        {% if page_obj.has_previous %}
-            <a href="?page=1">&laquo; first</a>
-            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
-        {% endif %}
-
-        <span class="current">
-            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
-        </span>
-
-        {% if page_obj.has_next %}
-            <a href="?page={{ page_obj.next_page_number }}">next</a>
-            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
-        {% endif %}
-    </span>
-</div>
-
-{%endif%}
 
 {% endblock %}

@@ -1,9 +1,11 @@
 from store import forms
 from store.models import Products
+from django.shortcuts import render
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from store.forms import ProductForm
 from django.views.generic import ListView
+from django.views.generic.base import View
 from django.core.paginator import Paginator,PageNotAnInteger,EmptyPage
 # Create your views here.
 
@@ -71,7 +73,7 @@ class SearchProductView(ListView):
             # And we oder the list wiht the nutriscore of each product
             category = self.categori_produit
             self.essais = Products.objects.filter(categorie=category).order_by(
-                'nutriscore_product')
+                'nutriscore_product')[:24]
             self.text = None
             return self.essais
         except Products.DoesNotExist:
@@ -80,6 +82,7 @@ class SearchProductView(ListView):
             # return to accueil"
             self.name_product = None
             self.essais = None
+            
             self.text = 'Produit absent de la base de données\
                          RETOURNER A L ACCUEIL'
             return self.text
@@ -88,5 +91,42 @@ class SearchProductView(ListView):
         kwargs['name_product'] = self.name_product
         kwargs['essais'] = self.essais
         kwargs['text'] = self.text
-        kwargs['picture']=self.product.picture
+        if Products.DoesNotExist:
+            kwargs['picture']=None
+        else:
+            kwargs['picture']=self.product.picture
         return super(SearchProductView, self).get_context_data(**kwargs)
+
+class DetailAlimentView(View):
+    template_name = 'store/detail_aliment.html'
+    model = Products
+
+    def get_object(self, pk):
+        
+        return Products.objects.get(pk=pk)
+
+
+    def get(self, request, pk, format=None):
+        product = self.get_object(pk)
+        print('Dans affichage product', product)
+        
+       
+        
+        context = {'product': product}
+       
+        return render(request, self.template_name, context)
+
+    """
+    def post(self, request, product_id):
+        print('product_id est:',product_id)
+        # We select the product
+        product=Products.objects.get( pk=product_id)
+        
+        print('Dans affichage product', product)
+        
+       
+        
+        context = {'product': product}
+       
+        return render(request, self.template_name, context)
+    """

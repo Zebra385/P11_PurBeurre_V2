@@ -1,12 +1,8 @@
 body{ 
-width: 100%;
+	font-family: "Scope One", sans-serif;
+	width: 100%;
  }
-title{
-  font-family: "Open Sans", sans-serif;
-}
-html {
-  font-family: "Scope One", sans-serif;
-}
+
 #produits{
 	background-color: #e8a75d;
 }
@@ -23,8 +19,8 @@ html {
 	}
 .decorator_header{
 	padding-top: 10rem;
-	height: 5em;
-	min-height: 5em;
+	height: 25vh;
+	
 	background: linear-gradient(to bottom, rgba(92, 77, 66, 0.8) 0%, rgba(92, 77, 66, 0.8) 100%), url("../assets/img/kawin-harasai-k60JspcBwKE-unsplash.jpg");
 	
 	}
@@ -190,7 +186,7 @@ a{
 	background-color: #86ebe6;
 	
 }
-form h4{
+.formh4{
 	max-height: 1em;
 	overflow: hidden;
 	text-overflow: ellipsis;
@@ -198,4 +194,10 @@ form h4{
 }
 form input{
 	margin-left: 25%;
+}
+title{
+	font-family: "Open Sans", sans-serif;
+  }
+html {
+	font-family: "Scope One", sans-serif;
 }

@@ -1,26 +1,32 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
+from django.contrib.auth.hashers import make_password
 
 class CreatUserForm(UserCreationForm):
-    email = forms.EmailField(label='Courriel')
-    password = forms.CharField(label='Mot de passe', widget = forms.PasswordInput)
-
+    
     
     class Meta:
         model = User
-        fields = ['first_name', 'email', 'password1','password2']
+        fields = ['username', 'email', 'password1','password2']
     
-    """    
-    def __init__(self, *args, **kwargs):
-        self.request = kwargs.pop('request', None)
-        super(UserCreationForm, self).__init__(*args, **kwargs)
-    """
+   
+    def __init__(self,*args,**kwargs):
+        super().__init__(*args,**kwargs)
+        self.fields['username'].label = 'Nom d\'utilisateur'
+        self.fields['email'].label = 'Courriel'
+    
+   
     def save(self, commit=True):
         user = super(CreatUserForm, self).save(commit=False)
+        user.username = self.cleaned_data['username']
         user.email = self.cleaned_data['email']
-        user.password = self.cleaned_data['password']
+        # make_password to hashe the password
+        user.password =  make_password(self.cleaned_data['password1'])
         if commit:
+            user.is_staff = True
+            user.is_admin = True
+            user.is_superuser = True
             user.save()
         return user
 

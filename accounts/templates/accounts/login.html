@@ -13,7 +13,7 @@
         </div>   
         <div class="row">
         <div class="col-lg-6">     
-        <form class="group-form" method="post" action="accounts/login/">
+        <form class="group-form" method="post" action="">
             {% csrf_token %}
             <table>
             <tr>
@@ -30,7 +30,7 @@
             
             <input type="hidden" name="next" value="{{ next }}">
             {% if form.errors %}
-            <p class="text-uppercase text-warning font-weight-bold">Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
+            <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
             {% endif %}
 
             {% if next %}
@@ -50,12 +50,12 @@
         </div>
         <div class="col-lg-5">  
         </br>
-        <form action="{% url 'accounts:register' %} {% if next%}? next = {{next}} {% endif%}">
-            <div class="text-uppercase text-white font-weight-bold"> <small> Vous n'avez pas de compte? ....>
-            <button type="submit" class="btn btn-success">S'inscrire</button>
+        <a href="{% url 'accounts:register' %}">S'incrire
+            <!--div class="text-uppercase text-white font-weight-bold"> <small> Vous n'avez pas de compte? ....-->
+            {% comment %} <button type="submit" class="btn btn-success">S'inscrire</button> {% endcomment %}
 
-        </div>
-        </form>
+        </a
+        
         </div>
         </div>
     {# Assumes you setup the password_reset view in your URLconf #}
