@@ -1,4 +1,4 @@
-from django.test import TestCase, RequestFactory
+from django.test import TestCase, RequestFactory, Client
 from django.contrib.auth.models import User, AnonymousUser
 from store.models import Categories, Products, Attributs
 from .views import AlimentListView
@@ -8,9 +8,8 @@ from django.urls import reverse
 
 
 class AlimentTestCase(TestCase):
-
     def setUp(self):
-        # Every test needs access to the request factory.
+            # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='jacob', email='jacob@…', password='top_secret')
@@ -32,9 +31,9 @@ class AlimentTestCase(TestCase):
     # test the context data
     def test_environment_set_in_context(self):
 
-        request = RequestFactory().get('/', data={'auth_user_id': self.user})
+        request = self.factory.get('/', data={'auth_user_id': self.user})
         request.user = self.user
-        print('self.user est ', self.user)
+        print('user est ', self.user)
 
         view = AlimentListView()
         view.setup(request)
@@ -42,7 +41,7 @@ class AlimentTestCase(TestCase):
         # SearchProduct as a view
         view.object_list = view.get_queryset()
         context = view.get_context_data()
-        self.assertIn('list_substituts', context)
+        self.assertIn('attributs_list', context)
 
     # test if a user is connect
     def test_user_exist(self):
@@ -56,7 +55,6 @@ class AlimentTestCase(TestCase):
 
 # Detail save a substitut in datadabase Attribut
 class SauvegardeTestCase(TestCase):
-
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
@@ -68,26 +66,39 @@ class SauvegardeTestCase(TestCase):
         id_category = int(self.category.id)
         Products.objects.create(name_product='Ravioli',
                                 categorie_id=id_category)
-        self.product = Products.objects.get(name_product='Ravioli')
-
+        self.Products = Products.objects.all()
+        #produit = Products.objects.get(name_product='Ravioli')
+  
     # test if a user is connect
     def test_user_exist(self):
-        request = self.factory.post('/store/details', data={'choice': 1, })
+        
+       
+        request = self.factory.post('/store/aliment', data={'choice': 1, })
         request.user = AnonymousUser()
-        print('le request.user est : ', request.user)
-        self.product = Products.objects.get(name_product='Ravioli')
+        
+        # product = Products.objects.get(name_product='Ravioli')
         response = SauvegardeView.as_view()(request)
+        
+        response.client = Client()
+        
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 'store:login')
+        self.assertRedirects(response, '/accounts/login/?next=/store/aliment')
+        
 
     # test the dowload in data base Attributs when the user is connect
     def test_load_attribut(self):
-        request = self.factory.post('/store/aliment', data={'choice': 1, })
+        request = self.factory.post('/store/aliment', data={'choice': 1,})
         request.user = self.user
-        
+        print('le request.user  du test loadest : ', request.user)
+        #client.login(username='jacob', password='top_secret')
         print(' dans test load attribut le request.user est : ', request.user.id)
+        
+        
         response = SauvegardeView.as_view()(request)
+        response.client = Client()
+        print('SauvegardeView.as_view()(request)', response)
+        # response =client.get('substituts:aliment')
         # code 302 because redirection to the store/aliment
-        self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, 'substituts:aliment')
+        self.assertEqual(response.status_code, 200)
+        self.assertTemplateUsed(response, 'store/aliment.html')

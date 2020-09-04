@@ -14,15 +14,13 @@ class AccueilPageTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
 
 
-"""
-#Test copyright page
-class CopyrightPtageTestCase(TestCase):
-     # test that copyright page returns a 200 if the item exists.
-    def test_copyright_page(self):
-        response = self.client.get(reverse('copyright'))
 
+# Test copyright page
+class CopyrightPageTestCase(TestCase):
+    # test that copyright page returns a 200 if the item exists.
+    def test_copyright_page(self):
+        response = self.client.get(reverse('store:copyright'))
         self.assertEqual(response.status_code, 200)
-"""
 
 
 # Detail SearchProduct

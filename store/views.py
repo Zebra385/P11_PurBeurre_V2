@@ -66,14 +66,17 @@ class SearchProductView(ListView):
             self.name_product = form.cleaned_data['name_product']
         else:
             self.name_product = None
+            self.picture= None
         try:
             self.product = Products.objects.get(name_product__iexact=self.name_product)
             self.categori_produit = self.product.categorie
+            self.picture = self.product.picture
             # To filter we looking for product than have the same category
             # And we oder the list wiht the nutriscore of each product
             category = self.categori_produit
             self.essais = Products.objects.filter(categorie=category).order_by(
                 'nutriscore_product')[:24]
+
             self.text = None
             return self.essais
         except Products.DoesNotExist:
@@ -82,7 +85,7 @@ class SearchProductView(ListView):
             # return to accueil"
             self.name_product = None
             self.essais = None
-            
+            self.picture= None
             self.text = 'Produit absent de la base de données\
                          RETOURNER A L ACCUEIL'
             return self.text
@@ -91,10 +94,11 @@ class SearchProductView(ListView):
         kwargs['name_product'] = self.name_product
         kwargs['essais'] = self.essais
         kwargs['text'] = self.text
-        if Products.DoesNotExist:
+        try: 
+            kwargs['picture']=self.picture
+        except Products.DoesNotExist:
             kwargs['picture']=None
-        else:
-            kwargs['picture']=self.product.picture
+                    
         return super(SearchProductView, self).get_context_data(**kwargs)
 
 class DetailAlimentView(View):

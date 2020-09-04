@@ -29,34 +29,34 @@
             </div>
         </div>
     </div>
+    e
         <div class="row list">
             {% for essai in page_obj %}
-            <!-- We show the possibilty of substituts-->
-            
-                
-                    <div class="col-sm-4">
+            <!-- We show the possibilty of substituts-->              
+                <div class="col-sm-4">
                     <div  class="h-75 parent_form" >
                         <img class="img-responsive image1_form h-60 w-100" src="{{ essai.attribut_choice.picture }}" alt="{{ essai.name_product}}">
-                        <h5 class="formh4 text-center"> {{essai.attribut_choice.name_product}} </h5>     
-                        <div class="row">
-                            <div class="col-lg-6 text-center">
-                                
-                                    <!--Nutriscore substitut-->
-                                    <h5 class="h5 mb-2">Nutriscore : <B>{{essai.attribut_choice.nutriscore_product| upper}}</B></h5>
-                                
-                            </div>
-                            <div class="col-lg-6 ">
-                                                       
-                                    <!--Nutrionel ingredients per 100g-->
-                                    <h5>Repères nutritionnel pour 100g</h5>
-                                
-                            </div>
-                        </div>
+                        <h5 class="formh4 text-center"> <a href="{% url 'store:detail' pk=essai.attribut_choice.id %}">{{essai.attribut_choice.name_product}} </h5>			        
+                        {% if essai.attribut_choice.nutriscore_product == "a" %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
+                        {% elif essai.attribut_choice.nutriscore_product == "b" %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_B.ico' %}"/>
+                        {% elif essai.attribut_choice.nutriscore_product == "c" %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_C.ico' %}"/>
+                        {% elif essai.attribut_choice.nutriscore_product == "d" %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_D.ico' %}"/>
+                        {% elif essai.attribut_choice.nutriscore_product == "e" %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_E.ico' %}"/>
+                        {% else %}
+                        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
+                        {% endif %}
+                    </div>
+                           
 
                
-                            <!-- url openfoodfacts to see the choice product-->
-                            <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.attribut_choice.url_site}}"><h5 >Openfoodfacts</h5></a>
-                            </div>
+                    <!-- url openfoodfacts to see the choice product-->
+                    <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.attribut_choice.url_site}}"><h5 >Openfoodfacts</h5></a>
+                    </div>
                         
                     </div>
                 

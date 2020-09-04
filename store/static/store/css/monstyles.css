@@ -184,7 +184,13 @@ a{
 	position: absolute;
 	top: 12rem;
 	background-color: #86ebe6;
-	
+}
+.image6 {
+	border: 3px solid #ccc;
+	border-radius: 4px;
+	box-shadow: 6px 6px 0px black;
+	width: 100%; 
+}	
 }
 .formh4{
 	max-height: 1em;

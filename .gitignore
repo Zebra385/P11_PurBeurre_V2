@@ -1,7 +1,7 @@
 env/
-PurBeurre_project/PurBeurre_project/__pycache__
+PurBeurre_project/__pycache__
 .~lock.requirements.txt#
-
+htmlcov/
 store/__pycache__/
 store/migrations/__pycache__/
 accounts/__pycache__/

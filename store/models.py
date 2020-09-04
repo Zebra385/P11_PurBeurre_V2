@@ -28,6 +28,10 @@ class Products(models.Model):
     store_product = models.CharField(max_length=100)
     picture = models.URLField()
     url_site = models.URLField()
+    fat = models.CharField(max_length=100, default='?')
+    saturated_fat =  models.CharField(max_length=100, default='?')
+    sugars =  models.CharField(max_length=100, default='?')
+    salt =  models.CharField(max_length=100, default='?')
     categorie = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):

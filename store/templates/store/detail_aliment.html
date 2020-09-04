@@ -2,6 +2,7 @@
 
 {% block title %} Détails aliment{% endblock %}
 {% block content %}
+{% load static %}
 <!-- Masthead-->
 <!-- We print the selected product-->
 <header class="masthead decorator_header parent_product">
@@ -23,14 +24,35 @@
         <div class="row">
             <div class="col-lg-6 text-center">
                 
-                    <!--Nutriscore substitut-->
-                    <h5 class="h5 mb-2">Nutriscore : <B>{{product.nutriscore_product| upper}}</B></h5>
+                    <!--Nutriscore -->
+                    
+                    {% if product.nutriscore_product == "a" %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_A.png' %}"/>
+			        {% elif product.nutriscore_product == "b" %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_B.png' %}"/>
+			        {% elif product.nutriscore_product == "c" %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_C.png' %}"/>
+			        {% elif product.nutriscore_product == "d" %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_D.png' %}"/>
+			        {% elif product.nutriscore_product == "e" %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_E.png' %}"/>
+			        {% else %}
+			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
+			        {% endif %}
+                    
                 
             </div>
             <div class="col-lg-6 ">
                                         
                     <!--Nutrionel ingredients per 100g-->
                     <h5>Repères nutritionnel pour 100g</h5>
+                    <ul>
+                        <li>{{product.fat|floatformat:1|default:'? '}} g de Matières grasses / Lipides</li>
+                        <li>{{product.saturated_fat|floatformat:1|default:'? '}} g d'Acides gras saturés</li>
+                        <li>{{product.sugars|floatformat:1|default:'? '}} g de Sucres</li>
+                        <li>{{product.salt|floatformat:1|default:'? '}} g de Sel</li>
+
+                    </ul>
                 
             </div>
         </div>
