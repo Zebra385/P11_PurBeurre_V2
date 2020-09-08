@@ -3,7 +3,31 @@ from django.db import IntegrityError
 from store.models import Categories, Products
 import requests
 
-MY_CATEGORIES = ['Chocolats', 'Pâtes à tartiner aux noisettes', 'Boissons gazeuses', 'Produits laitiers', 'Petit-déjeuners']
+MY_CATEGORIES = [
+    'Chocolats',
+    'Pâtes à tartiner aux noisettes',
+    'Boissons gazeuses', 
+    'Produits laitiers',
+    'Petit-déjeuners',
+    'Crèmes',
+    'Soupes de légumes',
+    'Fajitas',
+    'Chips de pommes de terre',
+    'Biscuits',
+    'Jambons',
+    'Fromages de vache',
+    'Moutardes',
+    'Poissons',
+    'Plats préparés en conserve',
+    'Poulets',
+    'Matières grasses végétales',
+    'Baguettes',
+    'Yaourts nature',
+    'Pâtes aux œufs',
+    'Croissants',
+    'Flocons de céréales',
+    'Rillettes pur porc',
+]
 
 def package_json(url):
     """
@@ -34,42 +58,37 @@ def package_product(name_category):
     
 
     # We take max 40 products per page
-    for j in range(1,80):
+    for j in range(1,20):
         try:
             name_product = package_json_product['products'][j]['product_name']
             print('le nouveau produit est :',j,name_product)
-            try:
-                Products.objects.update_or_create(
-                    name_product=name_product,
-                    nutriscore_product=package_json_product
-                    ['products'][j]['nutriscore_grade'],
-                    store_product=package_json_product
-                    ['products'][j]['stores'],
-                    picture=package_json_product
-                    ['products'][j]['image_url'],
-                    url_site=package_json_product
-                    ['products'][j]['url'],
-                    fat=package_json_product
-                    ['products'][j]['nutriments']['fat_100g'],
-                    saturated_fat=package_json_product
-                    ['products'][j]['nutriments']['saturated-fat_100g'],
-                    sugars=package_json_product
-                    ['products'][j]['nutriments']['sugars_100g'],
-                    salt=package_json_product
-                    ['products'][j]['nutriments']['salt_100g'],
-                    categorie_id=categorie_id,)
-            except Products.DoesNotExist:
-                pass
-            except ValueError:
-                pass
-            except KeyError:
-                pass
-            except IntegrityError:
-                pass
-        except ValueError:
+            
+            Products.objects.update_or_create(
+                openfoodfats_id=
+                defaults= {dicto cle de valeur}
+                name_product=name_product,
+                nutriscore_product=package_json_product
+                ['products'][j]['nutriscore_grade'],
+                store_product=package_json_product
+                ['products'][j]['stores'],
+                picture=package_json_product
+                ['products'][j]['image_url'],
+                url_site=package_json_product
+                ['products'][j]['url'],
+                fat=package_json_product
+                ['products'][j]['nutriments']['fat_100g'],
+                saturated_fat=package_json_product
+                ['products'][j]['nutriments']['saturated-fat_100g'],
+                sugars=package_json_product
+                ['products'][j]['nutriments']['sugars_100g'],
+                salt=package_json_product
+                ['products'][j]['nutriments']['salt_100g'],
+                categorie_id=categorie_id,)
+        
+        except ValueError,  KeyError, IntegrityError, IndexError:
             pass
-        except IndexError:
-                pass
+       
+       
 
 
 class Command(BaseCommand):
@@ -96,10 +115,6 @@ class Command(BaseCommand):
             # We fill the data base store.Categories
             Categories.objects.update_or_create(name_category=name_category)
             package_product(name_category)
-        """
-        product = Products.objects.all()
-        d = product.distinct('name_product')
-        for same_product in product:    
-            if i not in d:
-                same_product.delete()
-        """
+       
+        
+       

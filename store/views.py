@@ -68,7 +68,7 @@ class SearchProductView(ListView):
             self.name_product = None
             self.picture= None
         try:
-            self.product = Products.objects.get(name_product__iexact=self.name_product)
+            self.product = Products.objects.filter(name_product__iexact=self.name_product).first()
             self.categori_produit = self.product.categorie
             self.picture = self.product.picture
             # To filter we looking for product than have the same category

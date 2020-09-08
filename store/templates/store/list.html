@@ -1,5 +1,5 @@
 <!--We are begining by know if the user is connecting: If he is not we print a text message present in the variable text-->
-{% if essais%}
+{% if page_obj or essais%}
 	<!-- If the user does not be connect, we call him to login-->
 	
 	<!-- We show the result of th resarch in data base-->
@@ -14,7 +14,7 @@
 	    		{% csrf_token %}
 				
 		        
-			        <img class="img-responsive image1_form h-60 w-100" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
+			        <img class="img-responsive img-fluid image1_form h-50 w-75" src="{{ essai.picture }}" alt="{{ essai.name_product}}">
 			        
 			        {% if essai.nutriscore_product == "a" %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
@@ -29,27 +29,88 @@
 			        {% else %}
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
 			        {% endif %}
-			
-		        <h4 class="formh4 text-center" ><a href="{% url 'store:detail' pk=essai.id %}">{{ essai.name_product }}</a></h4> 
+				
+		        <a href="{% url 'store:detail' pk=essai.id %}"><h4 class=" text-center" >{{ essai.name_product |truncatewords:2 }}</h4> </a>
+				{% if btn == "True" %}
 		        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
-		        <input  class="form-control w-50" type="submit" value="Sauvegarder">
+		        <input  class="form-control w-75"   type="submit" value="Sauvegarder">
+				{% endif%}
 	   		</form>   
 	   	
 		</div>
 		<!-- We put three results per ligne when the screen is enough big-->
 		{% if forloop.counter|divisibleby:3 %}<div class="clearfix w-75"></div>{% endif %}
 				
+	{% endfor %}	
+
+
+	{% for essai in page_obj %}
+	<!-- We show the possibilty of substituts-->              
+		<div class="col-sm-4">
+			<div  class="h-75 parent_form" >
+				<img class="img-responsive image1_form h-50 w-75" src="{{ essai.attribut_choice.picture }}" alt="{{ essai.name_product}}">
+				<h5 class="formh4 text-center"> <a href="{% url 'store:detail' pk=essai.attribut_choice.id %}">{{essai.attribut_choice.name_product}} </h5>			        
+				{% if essai.attribut_choice.nutriscore_product == "a" %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
+				{% elif essai.attribut_choice.nutriscore_product == "b" %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_B.ico' %}"/>
+				{% elif essai.attribut_choice.nutriscore_product == "c" %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_C.ico' %}"/>
+				{% elif essai.attribut_choice.nutriscore_product == "d" %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_D.ico' %}"/>
+				{% elif essai.attribut_choice.nutriscore_product == "e" %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_E.ico' %}"/>
+				{% else %}
+				<img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
+				{% endif %}		
+				<!-- url openfoodfacts to see the choice product-->
+				<div class="form-control" id="site"><a class="nav-link js-scroll-trigger" href="{{essai.attribut_choice.url_site}}"><h5 >Openfoodfacts</h5></a>
+				</div>
+			</div>
+		</div>
+		
+		{% if forloop.counter|divisibleby:3 %}<div class="clearfix"></div>{% endif %}
+
 	{% endfor %}
-			
-	
-	
-	
-	
+
+	{% if is_paginated %}
+	<section class="page-section" >
+		<div class="pagination">
+			<span class="step-links">
+				{% if page_obj.has_previous %}
+					<a href="?page=1">&laquo; first</a>
+					<a href="?page={{ page_obj.previous_page_number }}">previous</a>
+				{% endif %}
+
+				<span class="current">
+					Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+				</span>
+
+				{% if page_obj.has_next %}
+					<a href="?page={{ page_obj.next_page_number }}">next</a>
+					<a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+				{% endif %}
+			</span>
+		</div>
+	</section>
+	{% endif%}
+
+<!-- If the user does not be connect, we call him to login-->
+
+
 {%else%}
+	<!-- If the user does not be connect, we call him to login-->
+	{% if btn == "True" %}
 	<div class="col-lg-12 text-center" id='alerte'>
         <h2 class="text-danger">Produit absent de la base de données\
                          RETOURNER A L ACCUEIL</h2>
     </div>
-		
+	{%else%}
+	<section class="page-section" >
+	<div class="col-lg-12 text-center" id='alerte'>
+		<h2 class="text-danger">{{text}}</h2>
+		<hr>
+	</div>
+	{% endif%}
+{% endif%}	
 
-{%endif%}

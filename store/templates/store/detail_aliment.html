@@ -4,38 +4,31 @@
 {% block content %}
 {% load static %}
 <!-- Masthead-->
-<!-- We print the selected product-->
-<header class="masthead decorator_header parent_product">
-	<div class="container-fluid image4 " >
-		<div class="row  align-items-center justify-content-center text-center decorator2">
-            <img class="img-responsive-center"  src="{{product.picture }}" alt="{{name_product}}">
-            <div class="image5">
-                <h3 class="text-uppercase text-blue font-weight-bold ">le produit est :  {{product.name_product}} </h1>
-                </h3>
-            </div>  
-		</div>
-	</div>
-    
+<!-- We show the selected product-->
+
+<header  style="background-image:url({{product.picture}}); height: 100vh;min-height: 20rem; padding-top: 4.5rem; padding-bottom: 0;">
+		<div class=" h2 text-uppercase text-center text-blue font-weight-bold image5 mx-auto">
+			le produit est :  {{product.name_product}} 
+		</div>  
 </header>
              
-<section class="page-section" id="produits">
+<section class=" page-section decorator1_fond">
     
-    <div  class="h-25 parent_form" >                  
+    <div  class="h-50 parent_form" >                  
         <div class="row">
             <div class="col-lg-6 text-center">
                 
                     <!--Nutriscore -->
-                    
                     {% if product.nutriscore_product == "a" %}
-			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_A.png' %}"/>
+			        <img class="responsive h-100" src=https://static.openfoodfacts.org/images/misc/nutriscore-a.svg"/>
 			        {% elif product.nutriscore_product == "b" %}
-			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_B.png' %}"/>
+			        <img class="responsive h-100" src="https://static.openfoodfacts.org/images/misc/nutriscore-b.svg"/>
 			        {% elif product.nutriscore_product == "c" %}
-			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_C.png' %}"/>
+			        <img class="responsive h-100" src="https://static.openfoodfacts.org/images/misc/nutriscore-c.svg"/>
 			        {% elif product.nutriscore_product == "d" %}
-			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_D.png' %}"/>
+			        <img class="responsive h-100" src="https://static.openfoodfacts.org/images/misc/nutriscore-d.svg"/>
 			        {% elif product.nutriscore_product == "e" %}
-			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_E.png' %}"/>
+			        <img class="responsive h-100" src="https://static.openfoodfacts.org/images/misc/nutriscore-e.svg"/>
 			        {% else %}
 			        <img class="responsive h-100" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
 			        {% endif %}
@@ -45,22 +38,27 @@
             <div class="col-lg-6 ">
                                         
                     <!--Nutrionel ingredients per 100g-->
-                    <h5>Repères nutritionnel pour 100g</h5>
+                    <h3>Repères nutritionnel pour 100g</h3>
                     <ul>
-                        <li>{{product.fat|floatformat:1|default:'? '}} g de Matières grasses / Lipides</li>
-                        <li>{{product.saturated_fat|floatformat:1|default:'? '}} g d'Acides gras saturés</li>
-                        <li>{{product.sugars|floatformat:1|default:'? '}} g de Sucres</li>
-                        <li>{{product.salt|floatformat:1|default:'? '}} g de Sel</li>
+                        <li class="h4">{{product.fat|floatformat:1|default:'? '}} g de Matières grasses / Lipides</li>
+                        <li class="h4">{{product.saturated_fat|floatformat:1|default:'? '}} g d'Acides gras saturés</li>
+                        <li class="h4">{{product.sugars|floatformat:1|default:'? '}} g de Sucres</li>
+                        <li class="h4">{{product.salt|floatformat:1|default:'? '}} g de Sel</li>
 
                     </ul>
                 
             </div>
         </div>
         <!-- url openfoodfacts to see the choice product-->
-        <div class=" text-center" id="site"><a class="nav-link js-scroll-trigger" href="{{product.url_site}}"><h5 >Openfoodfacts</h5></a>
-        </div>
-    
+          
     </div> 
+     <div class="row">
+            <div class="col-lg-4 text-center" >
+            </div>
+            <div class="col-lg-4 text-center" >
+                <a class=" form-control  nav-link js-scroll-trigger" id="site" href="{{product.url_site}}"><h5 >Openfoodfacts</h5></a>
+            </div>
+    </div>
 </section>
     
   {% endblock %} 

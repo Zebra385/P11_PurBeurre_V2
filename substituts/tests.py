@@ -64,16 +64,16 @@ class SauvegardeTestCase(TestCase):
         Categories.objects.create(name_category='pate')
         self.category = Categories.objects.get(name_category='pate')
         id_category = int(self.category.id)
-        Products.objects.create(name_product='Ravioli',
+        self.product = Products.objects.create(name_product='Ravioli',
                                 categorie_id=id_category)
-        self.Products = Products.objects.all()
+        
         #produit = Products.objects.get(name_product='Ravioli')
   
     # test if a user is connect
     def test_user_exist(self):
         
        
-        request = self.factory.post('/store/aliment', data={'choice': 1, })
+        request = self.factory.post('/store/aliment', data={'choice': self.product.id, })
         request.user = AnonymousUser()
         
         # product = Products.objects.get(name_product='Ravioli')
@@ -88,7 +88,7 @@ class SauvegardeTestCase(TestCase):
 
     # test the dowload in data base Attributs when the user is connect
     def test_load_attribut(self):
-        request = self.factory.post('/store/aliment', data={'choice': 1,})
+        request = self.factory.post('/store/aliment', data={'choice': self.product.id,})
         request.user = self.user
         print('le request.user  du test loadest : ', request.user)
         #client.login(username='jacob', password='top_secret')
@@ -98,6 +98,7 @@ class SauvegardeTestCase(TestCase):
         response = SauvegardeView.as_view()(request)
         response.client = Client()
         print('SauvegardeView.as_view()(request)', response)
+        request = RequestFactory().get('/', data={'name_product': "Ravioli"})
         # response =client.get('substituts:aliment')
         # code 302 because redirection to the store/aliment
         self.assertEqual(response.status_code, 200)

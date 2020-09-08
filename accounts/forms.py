@@ -24,9 +24,6 @@ class CreatUserForm(UserCreationForm):
         # make_password to hashe the password
         user.password =  make_password(self.cleaned_data['password1'])
         if commit:
-            user.is_staff = True
-            user.is_admin = True
-            user.is_superuser = True
             user.save()
         return user
 
