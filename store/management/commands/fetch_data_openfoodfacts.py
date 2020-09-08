@@ -57,7 +57,7 @@ def package_product(name_category):
     # data base Products
     
 
-    # We take max 40 products per page
+    # We take max 20 products per page
     for j in range(1,20):
         try:
             name_product = package_json_product['products'][j]['product_name']
