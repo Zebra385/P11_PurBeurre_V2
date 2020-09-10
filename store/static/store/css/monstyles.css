@@ -3,18 +3,6 @@ body{
 	width: 100%;
  }
 
-#presentation_utilisateur{
-	height: 25vh;
-	}
-#presentation_copyright{
-	height: 25vh;
-	}
-#presentation_email{
-	height: 25vh;
-	background-color: #e8a75d;
-	}
-
-
 .decorator1_fond{
 	background-color: #e8a75d;
 }
@@ -25,7 +13,6 @@ body{
 	background-color: #e8a75d;
 }
 .decorator1{
-
 	padding-top: 4em;
 	padding-bottom: 0.5em;
 	padding-left: 1em;
@@ -48,99 +35,17 @@ body{
 	border: 3px solid #ccc;
   	border-radius: 4px;
   	box-shadow: 6px 6px 0px black;
-	
 }
-ul.errorlist {
-margin-left: 160px;
-padding: 0;
-list-style-type: none;
-color: #c45525;
-
-}
-/* form label{
-	display: block;
-	float: left;
-	text-align: right;
-	padding: 4px 10px 0 0 ;
-}
-form input[type="email"], form input[type="text"],
-form input[type="password"]{
-	display: block;
-	float: center;
-	width: 250px;
-	padding: 2px;
-	margin: 1rem;
-}
-form input[type="submit"]{
-	display:blok;
-	float: center;
-	width: 250px;
-	height: 3rem;
-	padding: 2px;
-	margin: 1rem;
-	background-color: #9be991;
-	color:  #0a1070;
-	font-size: 2rem;
-	
-
-} */
 a{
 	color: #3b5998;
-}
-.decorator3{
-	
-	
-	
-	margin: 2%;
-	padding: 2%;
-	
-	
-	
-}
-.parent {
-	position: relative;
-	top: 0;
-	left: 0;
-	border: 3px solid #ccc;
-  	border-radius: 4px;
-	box-shadow: 6px 6px 0px black;
-	width: 100%; 
-
-}
-
-.image1 {
-	position: relative;
-	top: 0;
-	left: 0;
-	
-	height:10em;
 }
 .image2 {
 	position: absolute;
 	top: 0px;
 	right: 0px;
  }
-.image3 {
-	position: relative;
-	top: 0;
-	left: 0;
-	
-} 
-
 #site{
 	background-color: #86ebe6;
-}
-#aliment_header{
-	background-color: #e8a75d;
-}
-#aliment_footer{
-	background-color: #de9440;
-}
-#choice{
-	display: block;
-	float: center;
-	text-align: center;
-	padding: 2px;
 }
 .list{
 	margin:10%;
@@ -154,50 +59,17 @@ a{
   	border-radius: 4px;
 	box-shadow: 6px 6px 0px black;
 	height: 14rem;
-
 }
-
 .image1_form {
 	position: relative;
 	margin:.5rem;
 	padding:.5rem;
 	max-height: 10rem;
 	background-color: #de9440;
-	
-
-	
-}
-
-.parent_product {
-	position: relative;
-	top: 0;
-	left: 0;
-	border: 3px solid #ccc;
-	border-radius: 4px;
-	box-shadow: 6px 6px 0px black;
-	
-
-}
-.image4 {
-	position: relative;
-	top: .1rem;
-	
-
-	
 }
 .image5 {
 	background-color: #86ebe6;
-	
-
-	
-	
 }
-.image6 {
-	border: 3px solid #ccc;
-	border-radius: 4px;
-	box-shadow: 6px 6px 0px black;
-	width: 100%; 
-}	
 title{
 	font-family: "Open Sans", sans-serif;
   }

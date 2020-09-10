@@ -4,6 +4,8 @@ from store.models import Categories, Products, Attributs
 from .views import AlimentListView
 from .views import SauvegardeView
 from django.urls import reverse
+from django.contrib.auth import login 
+from django.contrib.auth.models import Permission
 # Create your tests here.
 
 
@@ -33,7 +35,7 @@ class AlimentTestCase(TestCase):
 
         request = self.factory.get('/', data={'auth_user_id': self.user})
         request.user = self.user
-        print('user est ', self.user)
+        # print('user est ', self.user)
 
         view = AlimentListView()
         view.setup(request)
@@ -47,7 +49,7 @@ class AlimentTestCase(TestCase):
     def test_user_exist(self):
         request = self.factory.post('/store/aliment')
         request.user = AnonymousUser()
-        print('le request.user est : ', request.user)
+        #print('le request.user est : ', request.user)
         response = AlimentListView.as_view()(request)
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
@@ -70,7 +72,7 @@ class SauvegardeTestCase(TestCase):
         #produit = Products.objects.get(name_product='Ravioli')
   
     # test if a user is connect
-    def test_user_exist(self):
+    def test_anonymoususer_exist(self):
         
        
         request = self.factory.post('/store/aliment', data={'choice': self.product.id, })
@@ -87,19 +89,32 @@ class SauvegardeTestCase(TestCase):
         
 
     # test the dowload in data base Attributs when the user is connect
-    def test_load_attribut(self):
+    def test_user_exist(self):
         request = self.factory.post('/store/aliment', data={'choice': self.product.id,})
         request.user = self.user
-        print('le request.user  du test loadest : ', request.user)
+        #print('le request.user  du test loadest : ', request.user)
         #client.login(username='jacob', password='top_secret')
-        print(' dans test load attribut le request.user est : ', request.user.id)
-        
+        #print(' dans test load attribut le request.user est : ', request.user.id)
+        self.client.login(username='jacob', password='top_secret')
         
         response = SauvegardeView.as_view()(request)
         response.client = Client()
         print('SauvegardeView.as_view()(request)', response)
-        request = RequestFactory().get('/', data={'name_product': "Ravioli"})
+        # request = RequestFactory().get('/', data={'name_product': "Ravioli"})
         # response =client.get('substituts:aliment')
-        # code 302 because redirection to the store/aliment
-        self.assertEqual(response.status_code, 200)
-        self.assertTemplateUsed(response, 'store/aliment.html')
+        # code 302 because redirection to the store/resultats
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response.client, '/substituts/aliments/')
+
+    # def test_load_attribut(self):
+    #     # perm = Permission.objects.get(codename='can_approve_requests')
+    #     # user.user_permissions.add(perm)
+    #     print('Dans test load attributs self.user est:',self.user)
+    #     #utilisateur = self.client.force_login(self.user, backend=None)
+    #     utilisateur = self.client.login(username='jacob', password='top_secret')
+    #     print('Dans test load attributs utilisateur est:', utilisateur)
+    #     response = self.client.post('/store/aliment', data={'choice': self.product.id,})
+    #     print('response est:', response)
+    #     self.assertTemplateUsed(response, 'store/aliment.html')
+       
+       

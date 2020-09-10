@@ -62,10 +62,10 @@ def package_product(name_category):
         try:
             name_product = package_json_product['products'][j]['product_name']
             print('le nouveau produit est :',j,name_product)
-            
+            #  openfoodfats_id=
+            #     defaults= {dicto cle de valeur}
             Products.objects.update_or_create(
-                openfoodfats_id=
-                defaults= {dicto cle de valeur}
+               
                 name_product=name_product,
                 nutriscore_product=package_json_product
                 ['products'][j]['nutriscore_grade'],
@@ -85,7 +85,7 @@ def package_product(name_category):
                 ['products'][j]['nutriments']['salt_100g'],
                 categorie_id=categorie_id,)
         
-        except ValueError,  KeyError, IntegrityError, IndexError:
+        except (ValueError, KeyError, IntegrityError, IndexError):
             pass
        
        

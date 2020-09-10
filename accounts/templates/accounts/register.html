@@ -21,7 +21,7 @@
                         
                             <h5 class="text-uppercase text-white font-weight-bold">{{ form.email.label_tag }}</h5>
                             {{ form.email }}
-                        
+     
                             <h5 class="text-uppercase text-white font-weight-bold">{{ form.password1.label_tag }}</h5>
                             {{ form.password1 }}
                       
@@ -30,7 +30,7 @@
                     
 
                     {% if form.errors %}
-                    <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}. Veuillez réessayer.</p>
+                    <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}.Une erreur c'est produite - Veuillez réessayer.</p>
                     {% endif %}
                     <input class="text-uppercase text-primary"id="site" type="submit"  value="S'INSCRIRE">
                     <input type = "hidden" name = "next" value = "{{next}}" />
