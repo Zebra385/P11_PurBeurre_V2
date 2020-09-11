@@ -65,25 +65,29 @@ def package_product(name_category):
             #  openfoodfats_id=
             #     defaults= {dicto cle de valeur}
             Products.objects.update_or_create(
-               
-                name_product=name_product,
-                nutriscore_product=package_json_product
+                openfoodfats_id= package_json_product
+                ['products'][j]['id'],
+                categorie_id=categorie_id,
+                defaults={
+                'name_product' :name_product,
+                'nutriscore_product':package_json_product
                 ['products'][j]['nutriscore_grade'],
-                store_product=package_json_product
+                'store_product':package_json_product
                 ['products'][j]['stores'],
-                picture=package_json_product
+                'picture':package_json_product
                 ['products'][j]['image_url'],
-                url_site=package_json_product
+                'url_site':package_json_product
                 ['products'][j]['url'],
-                fat=package_json_product
+                'fat':package_json_product
                 ['products'][j]['nutriments']['fat_100g'],
-                saturated_fat=package_json_product
+                'saturated_fat':package_json_product
                 ['products'][j]['nutriments']['saturated-fat_100g'],
-                sugars=package_json_product
+                'sugars':package_json_product
                 ['products'][j]['nutriments']['sugars_100g'],
-                salt=package_json_product
+                'salt':package_json_product
                 ['products'][j]['nutriments']['salt_100g'],
-                categorie_id=categorie_id,)
+                
+                })
         
         except (ValueError, KeyError, IntegrityError, IndexError):
             pass

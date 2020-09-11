@@ -30,9 +30,9 @@
 			        <img class="image2" src="{% static 'store/assets/img/nutriscore_I.ico' %}"/>
 			        {% endif %}
 				
-		        <a href="{% url 'store:detail' pk=essai.id %}"><h4 class=" text-center" >{{ essai.name_product |truncatechars:12}}</h4> </a>
+		        <a href="{% url 'store:detail' pk=essai.pk%}"><h4 class=" text-center" >{{ essai.name_product |truncatechars:12}}</h4> </a>
 				{% if btn == "True" %}
-		        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.id}}">
+		        <input  type="hidden" name="choice" id="choice{{ forloop.counter }}" value="{{essai.pk}}"">
 		        <input  class=" form-control text-uppercase text-primary"id="site"   type="submit" value="Sauvegarder">
 				{% endif%}
 	   		</form>   
@@ -49,7 +49,7 @@
 		<div class="col-sm-4">
 			<div  class="h-75 parent_form" >
 				<img class="img-responsive image1_form h-50 w-75" src="{{ essai.attribut_choice.picture }}" alt="{{ essai.name_product}}">
-				<h5 class="formh4 text-center"> <a href="{% url 'store:detail' pk=essai.attribut_choice.id %}">{{essai.attribut_choice.name_product|truncatechars:12}} </h5>			        
+				<h5 class="formh4 text-center"> <a href="{% url 'store:detail' pk=essai.attribut_choice.pk%}">{{essai.attribut_choice.name_product|truncatechars:12}} </h5>			        
 				{% if essai.attribut_choice.nutriscore_product == "a" %}
 				<img class="image2" src="{% static 'store/assets/img/nutriscore_A.ico' %}"/>
 				{% elif essai.attribut_choice.nutriscore_product == "b" %}
