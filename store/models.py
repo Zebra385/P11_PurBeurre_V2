@@ -17,13 +17,13 @@ class Categories(models.Model):
         """
         verbose_name = "categorie"
 
-
+# openfoodfats_id = models.BigIntegerField(null=True)
 class Products(models.Model):
     """
     Second class to load lot of product of each categories
     on the site openfoodfacts
     """
-    openfoodfats_id = models.BigIntegerField(primary_key=True,null=False)
+    openfoodfats_id = models.BigIntegerField(null=True)
     name_product = models.CharField(max_length=150, unique=True)
     nutriscore_product = models.CharField(max_length=1)
     store_product = models.CharField(max_length=100)

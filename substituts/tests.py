@@ -75,7 +75,7 @@ class SauvegardeTestCase(TestCase):
     def test_anonymoususer_exist(self):
         
        
-        request = self.factory.post('/store/aliment', data={'choice': self.product.id, })
+        request = self.factory.post('/store/aliment', data={'choice': self.product.pk, })
         request.user = AnonymousUser()
         
         # product = Products.objects.get(name_product='Ravioli')
@@ -89,32 +89,34 @@ class SauvegardeTestCase(TestCase):
         
 
     # test the dowload in data base Attributs when the user is connect
-    def test_user_exist(self):
-        request = self.factory.post('/store/aliment', data={'choice': self.product.id,})
-        request.user = self.user
+    def test_save_product(self):
+        
         #print('le request.user  du test loadest : ', request.user)
         #client.login(username='jacob', password='top_secret')
         #print(' dans test load attribut le request.user est : ', request.user.id)
         self.client.login(username='jacob', password='top_secret')
+        response = self.client.post(reverse('substituts:sauvegarde'), data={'choice': self.product.pk,})
         
-        response = SauvegardeView.as_view()(request)
-        response.client = Client()
-        print('SauvegardeView.as_view()(request)', response)
+        
         # request = RequestFactory().get('/', data={'name_product': "Ravioli"})
         # response =client.get('substituts:aliment')
         # code 302 because redirection to the store/resultats
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response.client, '/substituts/aliments/')
+        self.assertRedirects(response, '/substituts/aliment/')
 
     # def test_load_attribut(self):
-    #     # perm = Permission.objects.get(codename='can_approve_requests')
-    #     # user.user_permissions.add(perm)
-    #     print('Dans test load attributs self.user est:',self.user)
-    #     #utilisateur = self.client.force_login(self.user, backend=None)
-    #     utilisateur = self.client.login(username='jacob', password='top_secret')
-    #     print('Dans test load attributs utilisateur est:', utilisateur)
-    #     response = self.client.post('/store/aliment', data={'choice': self.product.id,})
+        
+    #     self.client.login(username='jacob', password='top_secret')
+        
+    # #     # perm = Permission.objects.get(codename='can_approve_requests')
+    # #     # user.user_permissions.add(perm)
+    # #     print('Dans test load attributs self.user est:',self.user)
+    # #     #utilisateur = self.client.force_login(self.user, backend=None)
+    # #     utilisateur = self.client.login(username='jacob', password='top_secret')
+    # #     print('Dans test load attributs utilisateur est:', utilisateur)
+    #     response = self.client.post('/store/aliment', data={'choice': self.product.pk,})
     #     print('response est:', response)
-    #     self.assertTemplateUsed(response, 'store/aliment.html')
+    # #     self.assertTemplateUsed(response, 'store/aliment.html')
+        # self.assertRedirects(response, '/substituts/aliments/')
        
        
