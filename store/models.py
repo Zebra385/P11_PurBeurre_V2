@@ -17,7 +17,7 @@ class Categories(models.Model):
         """
         verbose_name = "categorie"
 
-# openfoodfats_id = models.BigIntegerField(null=True)
+
 class Products(models.Model):
     """
     Second class to load lot of product of each categories
@@ -30,9 +30,9 @@ class Products(models.Model):
     picture = models.URLField()
     url_site = models.URLField()
     fat = models.CharField(max_length=100, blank=True, null=True)
-    saturated_fat =  models.CharField(max_length=100,  blank=True, null=True)
-    sugars =  models.CharField(max_length=100,  blank=True, null=True)
-    salt =  models.CharField(max_length=100,  blank=True, null=True)
+    saturated_fat = models.CharField(max_length=100,  blank=True, null=True)
+    sugars = models.CharField(max_length=100,  blank=True, null=True)
+    salt = models.CharField(max_length=100,  blank=True, null=True)
     categorie = models.ForeignKey(Categories, on_delete=models.CASCADE)
 
     def __str__(self):

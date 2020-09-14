@@ -4,14 +4,13 @@ from store.models import Categories, Products, Attributs
 from .views import AlimentListView
 from .views import SauvegardeView
 from django.urls import reverse
-from django.contrib.auth import login 
-from django.contrib.auth.models import Permission
-# Create your tests here.
 
 
 class AlimentTestCase(TestCase):
     def setUp(self):
-            # Every test needs access to the request factory.
+        """
+        Every test needs access to the request factory
+        """
         self.factory = RequestFactory()
         self.user = User.objects.create_user(
             username='jacob', email='jacob@…', password='top_secret')
@@ -19,24 +18,25 @@ class AlimentTestCase(TestCase):
         self.category = Categories.objects.get(name_category='pate')
         id_category = int(self.category.id)
         self.name_product = 'Ravioli'
-        product1 = Products.objects.create(name_product=self.name_product,
-                                                nutriscore_product="d",
-                                                categorie_id=id_category)
-        product2 = Products.objects.create(name_product="Ravioli bio3",
-                                                nutriscore_product="a",
-                                                categorie_id=id_category)
+        product1 = Products.objects.create(
+            name_product=self.name_product,
+            nutriscore_product="d",
+            categorie_id=id_category)
+        product2 = Products.objects.create(
+            name_product="Ravioli bio3",
+            nutriscore_product="a",
+            categorie_id=id_category)
         Attributs.objects.create(auth_user_id=self.user.id,
                                  attribut_choice=product1)
         Attributs.objects.create(auth_user_id=self.user.id,
                                  attribut_choice=product2)
 
-    # test the context data
     def test_environment_set_in_context(self):
-
+        """
+        test the context data
+        """
         request = self.factory.get('/', data={'auth_user_id': self.user})
         request.user = self.user
-        # print('user est ', self.user)
-
         view = AlimentListView()
         view.setup(request)
         # we fix the object _list because we do not call
@@ -45,18 +45,21 @@ class AlimentTestCase(TestCase):
         context = view.get_context_data()
         self.assertIn('attributs_list', context)
 
-    # test if a user is connect
     def test_user_exist(self):
+        """
+        test if a user is connect
+        """
         request = self.factory.post('/store/aliment')
         request.user = AnonymousUser()
-        #print('le request.user est : ', request.user)
         response = AlimentListView.as_view()(request)
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
 
 
-# Detail save a substitut in datadabase Attribut
 class SauvegardeTestCase(TestCase):
+    """
+    Detail save a substitut in datadabase Attribut
+    """
     def setUp(self):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
@@ -66,57 +69,32 @@ class SauvegardeTestCase(TestCase):
         Categories.objects.create(name_category='pate')
         self.category = Categories.objects.get(name_category='pate')
         id_category = int(self.category.id)
-        self.product = Products.objects.create(name_product='Ravioli',
-                                categorie_id=id_category)
-        
-        #produit = Products.objects.get(name_product='Ravioli')
-  
-    # test if a user is connect
+        self.product = Products.objects.create(
+            name_product='Ravioli',
+            categorie_id=id_category)
+
     def test_anonymoususer_exist(self):
-        
-       
-        request = self.factory.post('/store/aliment', data={'choice': self.product.pk, })
+        """
+        test if a user is connect
+        """
+        request = self.factory.post(
+            '/store/aliment',
+            data={'choice': self.product.pk, })
         request.user = AnonymousUser()
-        
-        # product = Products.objects.get(name_product='Ravioli')
         response = SauvegardeView.as_view()(request)
-        
         response.client = Client()
-        
         # code 302 because redirection to the login page
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/accounts/login/?next=/store/aliment')
-        
 
-    # test the dowload in data base Attributs when the user is connect
     def test_save_product(self):
-        
-        #print('le request.user  du test loadest : ', request.user)
-        #client.login(username='jacob', password='top_secret')
-        #print(' dans test load attribut le request.user est : ', request.user.id)
+        """
+        test the dowload in data base Attributs when the user is connect
+        """
         self.client.login(username='jacob', password='top_secret')
-        response = self.client.post(reverse('substituts:sauvegarde'), data={'choice': self.product.pk,})
-        
-        
-        # request = RequestFactory().get('/', data={'name_product': "Ravioli"})
-        # response =client.get('substituts:aliment')
-        # code 302 because redirection to the store/resultats
+        response = self.client.post(
+            reverse('substituts:sauvegarde'),
+            data={'choice': self.product.pk, })
+        # code 302 because redirection to the /substituts/aliment/
         self.assertEqual(response.status_code, 302)
         self.assertRedirects(response, '/substituts/aliment/')
-
-    # def test_load_attribut(self):
-        
-    #     self.client.login(username='jacob', password='top_secret')
-        
-    # #     # perm = Permission.objects.get(codename='can_approve_requests')
-    # #     # user.user_permissions.add(perm)
-    # #     print('Dans test load attributs self.user est:',self.user)
-    # #     #utilisateur = self.client.force_login(self.user, backend=None)
-    # #     utilisateur = self.client.login(username='jacob', password='top_secret')
-    # #     print('Dans test load attributs utilisateur est:', utilisateur)
-    #     response = self.client.post('/store/aliment', data={'choice': self.product.pk,})
-    #     print('response est:', response)
-    # #     self.assertTemplateUsed(response, 'store/aliment.html')
-        # self.assertRedirects(response, '/substituts/aliments/')
-       
-       

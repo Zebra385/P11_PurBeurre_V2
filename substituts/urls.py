@@ -5,7 +5,6 @@ from .views import AlimentListView
 
 app_name = "substituts"
 
-
 urlpatterns = [
     url(r'^resultats/$', ResultatsView.as_view(), name="resultats"),
     url(r'^sauvegarde/$', SauvegardeView.as_view(), name="sauvegarde"),

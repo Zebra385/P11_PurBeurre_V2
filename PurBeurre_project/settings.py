@@ -26,7 +26,7 @@ SECRET_KEY = '*0azs%)s(nxq&5g5%l&a&31o3g%-1&n9ubo=_jpfel-1e^08^g'
 # SECURITY WARNING: don't run with debug turned on in production!
 if os.environ.get('ENV') == 'PRODUCTION':
     DEBUG = False
-else: 
+else:
     DEBUG = True
 
 ALLOWED_HOSTS = ['purbeurzebra385.herokuapp.com', '127.0.0.1']
@@ -45,7 +45,6 @@ INSTALLED_APPS = [
     'store.apps.StoreConfig',
     'accounts.apps.AccountsConfig',
     'substituts.apps.SubstitutsConfig',
-    
     ]
 
 MIDDLEWARE = [
@@ -62,7 +61,6 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    
     'django.contrib.auth.backends.ModelBackend'
 ]
 
