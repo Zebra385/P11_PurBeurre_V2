@@ -1,7 +1,7 @@
 #
 # ***......................... P08_PurBeurre............................***
 ## 1. Qu'est ce que ce projet ?
-### C'est une site internet 
+### C'est un site internet 
 ###    Celui-ci permet de trouver  un substitut à un produit de consommation
 ## 2. Comment démarrer le programme?
 ###  Il faut installer les bibliothèques à  l'aide de la commande:
