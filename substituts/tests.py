@@ -7,6 +7,9 @@ from django.urls import reverse
 
 
 class AlimentTestCase(TestCase):
+    """
+    Test list of substitut in table Attributs
+    """
     def setUp(self):
         """
         Every test needs access to the request factory
@@ -58,7 +61,7 @@ class AlimentTestCase(TestCase):
 
 class SauvegardeTestCase(TestCase):
     """
-    Detail save a substitut in datadabase Attribut
+    Detail save a substitut in datadabase Attributs
     """
     def setUp(self):
         # Every test needs access to the request factory.
