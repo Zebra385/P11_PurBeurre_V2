@@ -1,7 +1,8 @@
-from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth.models import User
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.hashers import make_password
-
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from django.contrib.auth import get_user_model
+from django import forms
 
 class CreatUserForm(UserCreationForm):
     """
@@ -9,8 +10,8 @@ class CreatUserForm(UserCreationForm):
     """
 
     class Meta:
-        model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        model = get_user_model()
+        fields = ['email', 'username', 'password1', 'password2']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -26,3 +27,10 @@ class CreatUserForm(UserCreationForm):
         if commit:
             user.save()
         return user
+
+
+class LoginForm(AuthenticationForm):
+    """
+    Create to login with emai and password
+    """
+    username = forms.CharField(label='Email / Username')

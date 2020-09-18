@@ -61,9 +61,9 @@ MIDDLEWARE = [
 ]
 
 AUTHENTICATION_BACKENDS = [
-    'django.contrib.auth.backends.ModelBackend'
+    'accounts.backends.EmailBackend'
 ]
-
+AUTH_USER_MODEL = 'accounts.CustomUser' # new
 ROOT_URLCONF = 'PurBeurre_project.urls'
 
 TEMPLATES = [

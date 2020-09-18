@@ -45,7 +45,7 @@ class RegistrationView(View):
             user = form.save()
             login(request,
                   user,
-                  backend='django.contrib.auth.backends.ModelBackend')
+                  backend='accounts.backends.EmailBackend')
             return HttpResponseRedirect("/")
         else:
             print('form est:non valid')
