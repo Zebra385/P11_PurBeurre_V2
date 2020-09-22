@@ -10,6 +10,8 @@ env: DJANGO_SETTINGS_MODULE="PurBeurre_project.settings"
 services:
   - postgresql
 
+env: DJANGO_SETTINGS_MODULE=PurBeurre_project.settings.travis
+
 script:
   - ./manage.py test
 
