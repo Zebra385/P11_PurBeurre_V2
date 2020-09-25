@@ -7,9 +7,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django.views.generic import ListView
 
-def index(request):
-    MAIS POURQUOI EST-IL SI MECHANT ?
-    # ...
+
 class MoncompteView(TemplateView):
     """ That class to see who is connect or nobody"""
     template_name = 'store/moncompte.html'
