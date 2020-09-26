@@ -3,4 +3,3 @@ __pycache__
 .~lock.requirements.txt#
 htmlcov/
 /settings/production.py
-/PurBeurre_project/settings.py
