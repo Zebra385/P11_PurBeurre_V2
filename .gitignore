@@ -3,3 +3,4 @@ env/
 htmlcov/
 __pycache__
 /settings/production.py
+geckodriver.log
