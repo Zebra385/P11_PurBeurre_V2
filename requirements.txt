@@ -13,4 +13,8 @@ requests==2.24.0
 selenium==3.141.0
 sqlparse==0.3.1
 urllib3==1.25.10
+<<<<<<< HEAD
 whitenoise==5.2.0
+=======
+whitenoise==5.2.0
+>>>>>>> e0fb0b666c60cdbbdb30d287e1b4149a840608f2
