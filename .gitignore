@@ -1,5 +1,4 @@
 env/
-.~lock.requirements.txt#
 htmlcov/
 __pycache__
 /settings/production.py
