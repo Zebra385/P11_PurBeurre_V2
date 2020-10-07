@@ -27,6 +27,7 @@ MY_CATEGORIES = [
     'Croissants',
     'Flocons de céréales',
     'Rillettes pur porc',
+    'Thons blancs',
 ]
 
 
