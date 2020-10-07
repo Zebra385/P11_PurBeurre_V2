@@ -26,7 +26,7 @@ SECRET_KEY = '*0azs%)s(nxq&5g5%l&a&31o3g%-1&n9ubo=_jpfel-1e^08^g'
 # DEVELOPPEMENT
 DEBUG = True
 
-ALLOWED_HOSTS = ['purbeurzebra385.herokuapp.com', '127.0.0.1']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -54,7 +54,6 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.locale.LocaleMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
 ]
 
 AUTHENTICATION_BACKENDS = [
@@ -92,7 +91,7 @@ DATABASES = {
         # The name of database xhose is create befor
         'NAME': 'db_purbeurre',
         # The user must be replave by your own name
-        'USER': 'adm_postgres',
+        'USER': 'houche',
         'PASSWORD': 'maevateddy',
         'HOST': 'localhost',
         'PORT': '5432',
@@ -157,4 +156,4 @@ LOGIN_URL = '/accounts/login/'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
-
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

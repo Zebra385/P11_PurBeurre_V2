@@ -1,0 +1,78 @@
+body{ 
+	font-family: "Scope One", sans-serif;
+	width: 100%;
+ }
+
+.decorator1_fond{
+	background-color: #e8a75d;
+}
+.decorator2_fond{
+	background-color: #86ebe6;
+}
+.decorator3_fond{
+	background-color: #e8a75d;
+}
+.decorator1{
+	padding-top: 4em;
+	padding-bottom: 0.5em;
+	padding-left: 1em;
+	padding-right: 1em;
+	background-color: #ffffff;
+	opacity: 0.6;
+}
+.decorator2{
+	margin-top: 4em;
+	margin-bottom: 1em;
+	padding-top: 1.5em;
+	padding-bottom: 1em;
+	padding-left: 1em;
+	padding-right: 1em;
+	background-color: #000000;
+	opacity: 0.5;
+}
+.figure{
+	height: 10em;
+	border: 3px solid #ccc;
+  	border-radius: 4px;
+  	box-shadow: 6px 6px 0px black;
+}
+a{
+	color: #3b5998;
+}
+.image2 {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+ }
+#site{
+	background-color: #86ebe6;
+}
+.list{
+	margin:10%;
+}
+.parent_form {
+	position: relative;
+	top: 0;
+	left: 0;
+	margin:10%;
+	border: 3px solid #ccc;
+  	border-radius: 4px;
+	box-shadow: 6px 6px 0px black;
+	height: 14rem;
+}
+.image1_form {
+	position: relative;
+	margin:.5rem;
+	padding:.5rem;
+	max-height: 10rem;
+	background-color: #de9440;
+}
+.image5 {
+	background-color: #86ebe6;
+}
+title{
+	font-family: "Open Sans", sans-serif;
+  }
+html {
+	font-family: "Scope One", sans-serif;
+}
