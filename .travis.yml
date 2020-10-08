@@ -20,7 +20,7 @@ before_script:
   - sleep 3
 
 script:
-  - ./manage.py test
+  - python3 manage.py test
 
 # safelist
 branches:
