@@ -26,7 +26,7 @@ SECRET_KEY = '*0azs%)s(nxq&5g5%l&a&31o3g%-1&n9ubo=_jpfel-1e^08^g'
 # DEVELOPPEMENT
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -91,7 +91,7 @@ DATABASES = {
         # The name of database xhose is create befor
         'NAME': 'db_purbeurre',
         # The user must be replave by your own name
-        'USER': 'houche',
+        'USER': 'adm_postgres',
         'PASSWORD': 'maevateddy',
         'HOST': 'localhost',
         'PORT': '5432',
