@@ -2,4 +2,5 @@ env/
 __pycache__
 .~lock.requirements.txt#
 htmlcov/
-/settings/production.py
+PurBeurre_project/settings/production.py
+geckodriver.log
