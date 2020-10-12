@@ -1,8 +1,6 @@
 from django.contrib import admin
 from .models import Products, Categories, Attributs
 
-
-
 # Register your models here.
 
 
@@ -19,6 +17,3 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(Attributs)
 class AttributAdmin(admin.ModelAdmin):
     pass
-
-
-     

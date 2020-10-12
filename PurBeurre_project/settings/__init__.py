@@ -32,7 +32,6 @@ ALLOWED_HOSTS = ['127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts.apps.AccountsConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -41,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'store.apps.StoreConfig',
+    'accounts.apps.AccountsConfig',
     'substituts.apps.SubstitutsConfig',
     ]
 
@@ -157,11 +157,3 @@ LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
-# SMTP
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_PORT = 587
-EMAIL_HOST_USER = 'houcheserge@gmail.com'
-EMAIL_HOST_PASSWORD = '05770577'
