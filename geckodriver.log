@@ -1140,3 +1140,35 @@ console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Err
 1602139594682	Marionette	INFO	Listening on port 46191
 1602139594822	Marionette	WARN	TLS certificate errors will be ignored for this session
 1602139611554	Marionette	INFO	Stopped listening on port 46191
+1602495161163	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.BdW4BNZQJzvP"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602495168468	Marionette	INFO	Listening on port 37429
+1602495168507	Marionette	WARN	TLS certificate errors will be ignored for this session
+1602495181399	Marionette	INFO	Stopped listening on port 37429
+1602495183448	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.eypgduewHnBR"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602495190817	Marionette	INFO	Listening on port 33613
+1602495190902	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: chrome://marionette/content/proxy.js, line 287: NS_ERROR_NOT_INITIALIZED
+1602495204333	Marionette	INFO	Stopped listening on port 33613
+1602495435352	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.YDkm5p06FJEV"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602495442879	Marionette	INFO	Listening on port 40669
+1602495442892	Marionette	WARN	TLS certificate errors will be ignored for this session
+1602495456283	Marionette	INFO	Stopped listening on port 40669
+1602495458673	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.gIlzVV5t015x"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602495465680	Marionette	INFO	Listening on port 39613
+1602495465731	Marionette	WARN	TLS certificate errors will be ignored for this session
+JavaScript error: chrome://marionette/content/proxy.js, line 287: NS_ERROR_NOT_INITIALIZED
+1602495478352	Marionette	INFO	Stopped listening on port 39613
+1602497798881	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.NO1quL8vpUZ7"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602497806424	Marionette	INFO	Listening on port 33865
+1602497806523	Marionette	WARN	TLS certificate errors will be ignored for this session
+1602497819433	Marionette	INFO	Stopped listening on port 33865
+1602497821996	mozrunner::runner	INFO	Running command: "/usr/bin/firefox" "-marionette" "-foreground" "-no-remote" "-profile" "/tmp/rust_mozprofile.YRNznxQaasWC"
+console.error: SearchCache: "_readCacheFile: Error reading cache file:" (new Error("", "(unknown module)"))
+1602497829712	Marionette	INFO	Listening on port 45517
+1602497829746	Marionette	WARN	TLS certificate errors will be ignored for this session
+1602497843299	Marionette	INFO	Stopped listening on port 45517
