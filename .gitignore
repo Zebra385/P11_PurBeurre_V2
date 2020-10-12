@@ -2,5 +2,5 @@ env/
 __pycache__
 .~lock.requirements.txt#
 htmlcov/
-P11_PurBeurre_V2/PurBeurre_project/settings/production.py
-P11_PurBeurre_V2/geckodriver.log
+PurBeurre_project/settings/production.py
+geckodriver.log
