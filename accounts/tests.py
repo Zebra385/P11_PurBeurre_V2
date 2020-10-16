@@ -35,10 +35,10 @@ class RegistrationTestcase(TestCase):
         })
         self . assertFalse(form . is_valid())
 
+
 class MyloginTestcase(TestCase):
-    
+
     def test_reset_password(self):
         self.client.login()
         response = self.client.post(reverse('accounts:reset_password'))
         self.assertEqual(response.status_code, 200)
-        
