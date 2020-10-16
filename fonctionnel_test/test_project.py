@@ -31,9 +31,10 @@ class TestProject(StaticLiveServerTestCase):
         product_input.send_keys('nutella')
         self.selenium.find_element_by_xpath('//button[@type="submit"]').click()
 
+
 class TestResetPassword(StaticLiveServerTestCase):
     """
-    Test fonctionnal to test if the user cans change 
+    Test fonctionnal to test if the user cans change
     his password
     """
     @classmethod
@@ -47,7 +48,7 @@ class TestResetPassword(StaticLiveServerTestCase):
                     'password1': 'Marmote§',
                     'password2': 'Marmote§',
         })
-        comment = form.save()
+        form.save()
 
     @classmethod
     def tearDownClass(cls):
@@ -56,8 +57,9 @@ class TestResetPassword(StaticLiveServerTestCase):
 
     def test_reset_password_selenium(self):
         # We open the site with is localhost server
-        self.selenium.get('%s%s' % (self.live_server_url, '/accounts/reset_password/'))
+        self.selenium.get(
+            '%s%s' % (self.live_server_url, '/accounts/reset_password/')
+            )
         email_input = self.selenium.find_element_by_name("email")
         email_input.send_keys('jacob@orange.fr')
         self.selenium.find_element_by_xpath('//input[@type="submit"]').click()
-    
