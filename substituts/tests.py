@@ -67,7 +67,7 @@ class SauvegardeTestCase(TestCase):
         # Every test needs access to the request factory.
         self.factory = RequestFactory()
         self.user = CustomUser.objects.create_user(username='jacob',
-                                             email='jacob@…',
+                                             email='jacob@orange.fr',
                                              password='top_secret')
         Categories.objects.create(name_category='pate')
         self.category = Categories.objects.get(name_category='pate')
@@ -94,10 +94,10 @@ class SauvegardeTestCase(TestCase):
         """
         test the dowload in data base Attributs when the user is connect
         """
-        self.client.login(username='jacob', password='top_secret')
+        self.client.login(email='jacob@orange.fr', password='top_secret')
         response = self.client.post(
             reverse('substituts:sauvegarde'),
             data={'choice': self.product.pk, })
         # code 302 because redirection to the /substituts/aliment/
         self.assertEqual(response.status_code, 302)
-        self.assertRedirects(response, '/substituts/aliment/')
+        self.assertRedirects(response, '/accounts/login/?next=/substituts/sauvegarde/')
