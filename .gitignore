@@ -3,4 +3,5 @@ __pycache__
 
 htmlcov/
 PurBeurre_project/settings/production.py
-
+geckodriver.log
+*.log
