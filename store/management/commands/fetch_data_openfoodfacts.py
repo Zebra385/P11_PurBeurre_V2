@@ -2,6 +2,8 @@ from django.core.management.base import BaseCommand
 from django.db import IntegrityError
 from store.models import Categories, Products
 import requests
+import logging
+logging.basicConfig( level=logging.DEBUG, filename='../env/var/log/debug_miseajour_db.log')
 
 MY_CATEGORIES = [
     'Chocolats',
@@ -61,31 +63,33 @@ def package_product(name_category):
         try:
             name_product = package_json_product['products'][j]['product_name']
             print('le nouveau produit est :', j, name_product)
-            #  openfoodfats_id=
-            #     defaults= {dicto cle de valeur}
-            Products.objects.update_or_create(
-                openfoodfats_id=package_json_product
-                ['products'][j]['id'],
-                categorie_id=categorie_id,
-                defaults={
-                    'name_product': name_product,
-                    'nutriscore_product': package_json_product
-                    ['products'][j]['nutriscore_grade'],
-                    'store_product': package_json_product
-                    ['products'][j]['stores'],
-                    'picture': package_json_product
-                    ['products'][j]['image_url'],
-                    'url_site': package_json_product
-                    ['products'][j]['url'],
-                    'fat': package_json_product
-                    ['products'][j]['nutriments']['fat_100g'],
-                    'saturated_fat': package_json_product
-                    ['products'][j]['nutriments']['saturated-fat_100g'],
-                    'sugars': package_json_product
-                    ['products'][j]['nutriments']['sugars_100g'],
-                    'salt': package_json_product
-                    ['products'][j]['nutriments']['salt_100g'],
-                })
+            try:
+                Products.objects.get(name_product=name_product)
+                pass
+            except:
+                Products.objects.update_or_create(
+                    openfoodfats_id=package_json_product
+                    ['products'][j]['id'],
+                    categorie_id=categorie_id,
+                    defaults={
+                        'name_product': name_product,
+                        'nutriscore_product': package_json_product
+                        ['products'][j]['nutriscore_grade'],
+                        'store_product': package_json_product
+                        ['products'][j]['stores'],
+                        'picture': package_json_product
+                        ['products'][j]['image_url'],
+                        'url_site': package_json_product
+                        ['products'][j]['url'],
+                        'fat': package_json_product
+                        ['products'][j]['nutriments']['fat_100g'],
+                        'saturated_fat': package_json_product
+                        ['products'][j]['nutriments']['saturated-fat_100g'],
+                        'sugars': package_json_product
+                        ['products'][j]['nutriments']['sugars_100g'],
+                        'salt': package_json_product
+                        ['products'][j]['nutriments']['salt_100g'],
+                    })
         except (ValueError, KeyError, IntegrityError, IndexError):
             pass
 
