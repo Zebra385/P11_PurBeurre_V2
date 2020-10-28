@@ -11,7 +11,7 @@ class EmailBackend(ModelBackend):
         try:
             # login only by email
             user = UserModel.objects.get(
-                Q(email__iexact=username))
+                Q(username__iexact=username) | Q(email__iexact=username))
         except UserModel.DoesNotExist:
             UserModel().set_password(password)
         except MultipleObjectsReturned:
