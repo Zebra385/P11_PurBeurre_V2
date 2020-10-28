@@ -28,7 +28,15 @@
                             
                             
                             <input type="hidden" name="next" value="{{ next }}">
-                            
+                            <!-- Reset password-->
+                            <section class="row h-25 group-form decorator2">
+                                <div class="col-lg-7 ">
+                                    <h5 class=" text-uppercase text-white font-weight-bold">Mot de passe oublié?</h5>
+                                </div>
+                                <div class="col-lg-5">
+                                    <a href="{% url 'accounts:reset_password' %}"><h4 class="text-uppercase text-primary"id="site">Renouveler </h4></a>
+                                </div>
+                            </section>
                         {% if form.errors %}
                         <p class="text-uppercase text-warning font-weight-bold">{{form.errors}}Votre nom d'utilisateur et votre mot de passe ne correspondent pas. Veuillez réessayer.</p>
                         {% endif %}
