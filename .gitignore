@@ -3,5 +3,9 @@ __pycache__
 
 htmlcov/
 PurBeurre_project/settings/production.py
+PurBeurre_project/settings/__pycache__
+PurBeurre_project/__pycache__
+store/management/__pycache__
+store/management/commands/__pycache__
 geckodriver.log
 *.log
