@@ -94,7 +94,7 @@ class SauvegardeTestCase(TestCase):
         """
         test the dowload in data base Attributs when the user is connect
         """
-        self.client.login(email='jacob@orange.fr', password='top_secret')
+        self.client.login(username='jacob@orange.fr', password='top_secret')
         response = self.client.post(
             reverse('substituts:sauvegarde'),
             data={'choice': self.product.pk, })
