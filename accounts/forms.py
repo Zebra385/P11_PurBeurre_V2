@@ -3,6 +3,7 @@ from django.contrib.auth.hashers import make_password
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth import get_user_model
 from django import forms
+from accounts.models import CustomUser
 
 class CreatUserForm(UserCreationForm):
     """
@@ -10,8 +11,10 @@ class CreatUserForm(UserCreationForm):
     """
 
     class Meta:
-        model = get_user_model()
-        fields = ['email', 'username', 'password1', 'password2']
+        # model = get_user_model()
+        model = CustomUser()
+        
+        fields = UserCreationForm.Meta.fields + ('email', 'username', 'password1', 'password2',)
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

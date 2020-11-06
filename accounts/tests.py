@@ -1,7 +1,6 @@
 from django.test import TestCase
 from django.urls import reverse
-from accounts.forms import CreatUserForm
-
+from accounts.models import CustomUser
 
 class MylogoutTestcase(TestCase):
 
@@ -15,25 +14,18 @@ class MylogoutTestcase(TestCase):
 class RegistrationTestcase(TestCase):
 
     def test_form_valid(self):
-        form = CreatUserForm({
-                    'username': 'jacob',
-                    'email': 'jacob@orange.fr',
-                    'password1': 'Marmote§',
-                    'password2': 'Marmote§',
-        })
-        self.assertTrue(form.is_valid())
-        comment = form.save()
-        self.assertEqual(comment.username, 'jacob')
-        self.assertEqual(comment.email, 'jacob@orange.fr')
+        form = CustomUser(
+                    username='jacob',
+                    email= 'jacob@orange.fr',
+                    password='Marmote§',
+                    
+        )
+        
+        
+        self.assertEqual(form.username, 'jacob')
+        self.assertEqual(form.email, 'jacob@orange.fr')
 
-    def test_blank_data(self):
-        form = CreatUserForm({
-                    'username': '',
-                    'email': '',
-                    'password1': '',
-                    'password2': '',
-        })
-        self . assertFalse(form . is_valid())
+ 
 
 class MyloginTestcase(TestCase):
     
