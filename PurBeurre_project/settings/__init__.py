@@ -90,7 +90,7 @@ DATABASES = {
         'NAME': 'db_purbeurre',
         # The user must be replave by your own name
         'USER': 'adm_postgres',
-        'PASSWORD': 'maevateddy',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '5432',
     }
@@ -161,5 +161,5 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
-EMAIL_HOST_USER = 'houche.zebra385@gmail.com'
-EMAIL_HOST_PASSWORD = 'C6dpn8h7bCMfdwE'
+EMAIL_HOST_USER = ''
+EMAIL_HOST_PASSWORD = ''
